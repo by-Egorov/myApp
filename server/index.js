@@ -2,6 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
+import authRouter from './routers/authRouter.js'
 
 const PORT = process.env.PORT || 5000
 const db = process.env.DB_NAME
@@ -18,6 +19,8 @@ mongoose
 
 app.use(express.json())
 app.use(cors())
+
+app.use('/api', authRouter)
 
 app.listen(PORT, error => {
 	if (error) {
