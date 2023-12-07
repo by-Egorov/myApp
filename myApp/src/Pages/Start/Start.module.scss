@@ -1,0 +1,78 @@
+@import '../../mixin.scss';
+
+.start {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	height: 100vh;
+	padding: 20px 0;
+	&__title {
+		width: 200px;
+		font-size: 18px;
+		padding: 5px;
+		text-align: center;
+	}
+	&__inputs {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
+	}
+	&__input {
+		width: 70%;
+		height: 30px;
+		border-radius: 30px;
+		border: 1px solid #000;
+		padding-left: 10px;
+		color: #7b7a7a;
+
+		@include placeholder {
+			color: #7b7a7a;
+			opacity: 1;
+			transition: opacity 300ms;
+		}
+		&:focus {
+			@include placeholder {
+				opacity: 0;
+			}
+		}
+		&_select {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			width: 73%;
+			height: 34px;
+			border-radius: 30px;
+			border: 1px solid #000;
+			padding-left: 10px;
+			color: #7b7a7a;
+		}
+	}
+	&__button {
+
+		&_btn {
+		margin-top: 100px;
+		background: transparent;
+		border-radius: 12px;
+		border: 1px solid #000;
+		padding: 10px 20px;
+	}
+	}
+}
+.select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 73%;
+	height: 34px;
+	border-radius: 30px;
+	border: 1px solid #000;
+	padding-left: 10px;
+	color: #7b7a7a;
+}
+.err {
+	color: red;
+}
