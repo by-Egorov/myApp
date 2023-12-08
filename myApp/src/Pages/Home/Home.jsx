@@ -35,7 +35,6 @@ const Home = () => {
 	const handleModalClose = () => {
 		setSelectedCardType(null)
 	}
-
 	return (
 		<>
 			{user ? (
@@ -51,7 +50,7 @@ const Home = () => {
 							<ul>
 								<li>{user.carBrand}</li>
 								<li>{user.carModel}</li>
-								<li>{user.carYear} год</li>
+								<li>{user.carYear} year</li>
 							</ul>
 						</div>
 						<div className={style.home__image}>
@@ -89,51 +88,51 @@ const Home = () => {
 							)}
 						</div>
 						<div className={style.home__cards}>
-							<Card
-								title='Запчасти'
-								icon={<GiMechanicGarage size={50} />}
-								bodyContent={
-									<>
-										<div className={style.card__body_title}>Сумма:</div>
-										<div className={style.card__body_sum}>2300 р</div>
-									</>
-								}
-								onClick={() => handleCardClick('spares')}
-								button={<IoIosAddCircleOutline size={30} />}
-							/>
-							<Card
-								title='Бензин'
-								icon={<FaGasPump size={50} />}
-								bodyContent={
-									<>
-										<div className={style.card__body_title}>Сумма:</div>
-										<div className={style.card__body_sum}>2300 р</div>
-									</>
-								}
-								onClick={() => handleCardClick('gasoline')}
-								button={<IoIosAddCircleOutline size={30} />}
-							/>
-							<Card
-								title='Пробег'
-								icon={<IoMdSpeedometer size={50} />}
-								bodyContent={
-									<>
-										<span> {user.carMileage} км </span>
-									</>
-								}
-							/>
-							<Card
-								title='Аксессуары'
-								icon={<FaShopify size={50} />}
-								bodyContent={
-									<>
-										<div className={style.card__body_title}>Сумма:</div>
-										<div className={style.card__body_sum}>2300 р</div>
-									</>
-								}
-								onClick={() => handleCardClick('accessories')}
-								button={<IoIosAddCircleOutline size={30} />}
-							/>
+								<Card
+									title='Spares'
+									icon={<GiMechanicGarage size={50} />}
+									bodyContent={
+										<>
+											<div className={style.card__body_title}>Total price:</div>
+											<div className={style.card__body_sum}>2300 р</div>
+										</>
+									}
+									handleClick={() => handleCardClick('spares')}
+									button={<IoIosAddCircleOutline size={30} />}
+								/>
+								<Card
+									title='Gasoline'
+									icon={<FaGasPump size={50} />}
+									bodyContent={
+										<>
+											<div className={style.card__body_title}>Total price:</div>
+											<div className={style.card__body_sum}>2300 р</div>
+										</>
+									}
+									handleClick={() => handleCardClick('gasoline')}
+									button={<IoIosAddCircleOutline size={30} />}
+								/>
+								<Card
+									title='Mileage'
+									icon={<IoMdSpeedometer size={50} />}
+									bodyContent={
+										<>
+											<span> {user.carMileage} km </span>
+										</>
+									}
+								/>
+								<Card
+									title='Accessories'
+									icon={<FaShopify size={50} />}
+									bodyContent={
+										<>
+											<div className={style.card__body_title}>Total price:</div>
+											<div className={style.card__body_sum}>2300 р</div>
+										</>
+									}
+									handleClick={() => handleCardClick('accessories')}
+									button={<IoIosAddCircleOutline size={30} />}
+								/>
 						</div>
 					</div>
 					{selectedCardType && (
