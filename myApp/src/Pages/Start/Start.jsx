@@ -17,6 +17,7 @@ const Start = () => {
 	const dispatch = useDispatch()
 	const {
 		register,
+		reset,
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
@@ -27,12 +28,13 @@ const Start = () => {
 	const [selectedMileage, setSelectedMileage] = useState('')
 
 	const registration = async data => {
-		const { email, password, carYear, carMileage, carModel, carBrand } = data
+		const { email, password,  carYear, carMileage, carModel, carBrand } = data
 		try {
 			dispatch({
 				type: 'ADD_CAR',
 				payload: {
 					id: new Date(),
+					email: email,
 					carBrand: carBrand,
 					carModel: carModel,
 					carYear: carYear,
@@ -47,6 +49,15 @@ const Start = () => {
 				carModel,
 				carYear,
 				carMileage,
+			})
+
+			reset({
+				email: '',
+				password: '',
+				carBrand: '',
+				carModel: '',
+				carYear: '',
+				carMileage: '',
 			})
 			console.log(response.data)
 			setUserData(response.data)

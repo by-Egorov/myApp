@@ -8,7 +8,10 @@ import style from './Home.module.scss'
 import preloadCar from '../../assets/preloadCar.svg'
 import Modal from '../../components/AddInfo/Modal.jsx'
 import Start from '../Start/Start.jsx'
-import { handleResetImage, handleShowAddImage } from '../../utils/Handlers/handlers.js'
+import {
+	handleResetImage,
+	handleShowAddImage,
+} from '../../utils/Handlers/handlers.js'
 import Card from '../../components/Card/Card.jsx'
 import ModalContents from '../../components/ModalContent/ModalContents.jsx'
 
@@ -16,7 +19,7 @@ const Home = () => {
 	const { register, handleSubmit } = useForm()
 	const user = useSelector(state => state.user.user)
 	const [addImage, setAddImage] = useState(false)
-    const [selectedCardType, setSelectedCardType] = useState(null)
+	const [selectedCardType, setSelectedCardType] = useState(null)
 	const [userCarImage, setUserCarImage] = useState(
 		JSON.parse(localStorage.getItem('userCarImage')) || null
 	)
@@ -26,20 +29,22 @@ const Home = () => {
 		setUserCarImage(data.image)
 		localStorage.setItem('userCarImage', JSON.stringify(data.image))
 	}
-    const handleCardClick = (cardType) => {
-        setSelectedCardType(cardType);
-      }
-      const handleModalClose = () => {
-        setSelectedCardType(null);
-      }
-	
+	const handleCardClick = cardType => {
+		setSelectedCardType(cardType)
+	}
+	const handleModalClose = () => {
+		setSelectedCardType(null)
+	}
+
 	return (
 		<>
 			{user ? (
 				<div className='container'>
 					<div
 						className={
-							selectedCardType ? `${style.home} ${style.opacity}` : `${style.home}`
+							selectedCardType
+								? `${style.home} ${style.opacity}`
+								: `${style.home}`
 						}
 					>
 						<div className={style.home__title}>
@@ -103,8 +108,6 @@ const Home = () => {
 									<>
 										<div className={style.card__body_title}>Сумма:</div>
 										<div className={style.card__body_sum}>2300 р</div>
-										<div className={style.card__body_title}>Литры:</div>
-										<div className={style.card__body_sum}>12 л</div>
 									</>
 								}
 								onClick={() => handleCardClick('gasoline')}
@@ -133,7 +136,12 @@ const Home = () => {
 							/>
 						</div>
 					</div>
-					{selectedCardType && <Modal onClick={handleModalClose} cardContent={ModalContents[selectedCardType]} />}
+					{selectedCardType && (
+						<Modal
+							onClick={handleModalClose}
+							cardContent={ModalContents[selectedCardType]}
+						/>
+					)}
 				</div>
 			) : (
 				<Start />
