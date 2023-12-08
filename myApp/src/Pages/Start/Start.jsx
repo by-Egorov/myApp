@@ -64,6 +64,7 @@ const Start = () => {
 			console.log(userData)
 			localStorage.setItem('user', JSON.stringify(response.data))
 			navigate('/')
+			window.location.reload()
 		} catch (e) {
 			alert(e)
 		}
