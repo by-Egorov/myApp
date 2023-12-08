@@ -8,7 +8,7 @@ import style from './Home.module.scss'
 import preloadCar from '../../assets/preloadCar.svg'
 import Modal from '../../components/AddInfo/Modal.jsx'
 import Start from '../Start/Start.jsx'
-import { handleResetImage, handleShowAddImage } from '../../utils/handlers.js'
+import { handleResetImage, handleShowAddImage } from '../../utils/Handlers/handlers.js'
 import Card from '../../components/Card/Card.jsx'
 import ModalContents from '../../components/ModalContent/ModalContents.jsx'
 
