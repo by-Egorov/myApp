@@ -2,9 +2,10 @@ const defaultState = {
 	user: JSON.parse(localStorage.getItem('user')) || {},
 }
 export const userReducer = (state = defaultState, action) => {
+	let newState
 	switch (action.type) {
 			case 'ADD_USER':
-					const newState = {
+					newState = {
 							...state,
 							user: {...state.user, ...action.payload},
 					}
