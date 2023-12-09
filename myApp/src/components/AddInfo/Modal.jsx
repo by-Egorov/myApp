@@ -9,13 +9,11 @@ const Modal = ({ cardContent, onClick }) => {
 		from: { opacity: 0, transform: 'translateY(100%)' },
 	})
 	return (
-		// <div className='container'>
 		<animated.div style={animation} className={style.modal}>
 			<IoIosArrowDown size={30} onClick={onClick} />
 
 			<div className={style.modal__content}>{cardContent}</div>
 		</animated.div>
-		// </div>
 	)
 }
 

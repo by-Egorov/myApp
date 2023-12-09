@@ -14,8 +14,7 @@ const createAccessoriesContent = () => {
 		} = useForm()
 		return (
 			<>
-				<div className={style.accessories}>
-					<form className={`${style.accessories__form} ${style.form}`}>
+					<form className={style.form}>
 						<input
 							className={style.input}
 							{...register('title', {
@@ -45,7 +44,6 @@ const createAccessoriesContent = () => {
 							</button>
 						</div>
 					</form>
-				</div>
 			</>
 		)
 	}
@@ -106,8 +104,7 @@ const createSparesContent = () => {
 		} = useForm()
 		return (
 			<>
-				<div className={style.gasoline}>
-					<form className={`${style.gasoline__form} ${style.form}`}>
+					<form className={style.form}>
 						<input
 							className={style.input}
 							{...register('mileage', {
@@ -148,7 +145,6 @@ const createSparesContent = () => {
 							</button>
 						</div>
 					</form>
-				</div>
 			</>
 		)
 	}
