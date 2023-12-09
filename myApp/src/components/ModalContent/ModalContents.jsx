@@ -55,7 +55,7 @@ const createAccessoriesContent = () => {
 const createGasolineContent = () => {
 	const GasolineContent = () => {
 		const dispatch = useDispatch()
-		const user = useSelector(state => state.user.user)
+		// const user = useSelector(state => state.user.user)
 		const {
 			register,
 			handleSubmit,
@@ -64,15 +64,13 @@ const createGasolineContent = () => {
 
 		const addGas = data => {
 			const { date, price } = data
-			const updCar = dispatch({
-				type: 'ADD_CAR_INFO',
+			dispatch({
+				type: 'ADD_GAS',
 				payload: {
-					id: user._id,
-					date: date,
-					price: price,
+						date: date,
+						price: price,
 				},
 			})
-			localStorage.setItem('car', JSON.stringify(updCar.payload))
 		}
 
 		return (

@@ -106,7 +106,7 @@ const Home = () => {
 									bodyContent={
 										<>
 											<div className={style.card__body_title}>Total price:</div>
-											<div className={style.card__body_sum}>2300 р</div>
+											<div className={style.card__body_sum}>{user.gas.price} р</div>
 										</>
 									}
 									handleClick={() => handleCardClick('gasoline')}
