@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
@@ -55,7 +54,7 @@ const createAccessoriesContent = () => {
 const createGasolineContent = () => {
 	const GasolineContent = () => {
 		const dispatch = useDispatch()
-		// const user = useSelector(state => state.user.user)
+		const user = useSelector(state => state.user.user)
 		const {
 			register,
 			handleSubmit,
@@ -63,6 +62,7 @@ const createGasolineContent = () => {
 		} = useForm()
 
 		const addGas = data => {
+			console.log(user)
 			dispatch({
 				type: 'ADD_GAS',
 				payload: {
@@ -70,6 +70,7 @@ const createGasolineContent = () => {
 						price: data.price,
 				},
 			})
+
 		}
 
 		return (

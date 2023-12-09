@@ -35,6 +35,7 @@ const Home = () => {
     const handleModalClose = () => {
         setSelectedCardType(null)
     }
+    console.log(user)
     return (
         <>
             {user ? (

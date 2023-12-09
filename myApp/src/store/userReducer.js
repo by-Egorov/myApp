@@ -1,5 +1,5 @@
 const defaultState = {
-	user: JSON.parse(localStorage.getItem('user')) || null,
+	user: JSON.parse(localStorage.getItem('user')) || {gas: []},
 }
 export const userReducer = (state = defaultState, action) => {
 	let newState
