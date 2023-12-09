@@ -24,7 +24,7 @@ const createAccessoriesContent = () => {
 						})}
 						placeholder='Название'
 					/>
-					{errors?.email?.type === 'required' && (
+					{errors?.title?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<input
@@ -34,7 +34,7 @@ const createAccessoriesContent = () => {
 						})}
 						placeholder='Цена'
 					/>
-					{errors?.email?.type === 'required' && (
+					{errors?.price?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<div className={style.icon}>
@@ -63,12 +63,11 @@ const createGasolineContent = () => {
 		} = useForm()
 
 		const addGas = data => {
-			const { date, price } = data
 			dispatch({
 				type: 'ADD_GAS',
 				payload: {
-						date: date,
-						price: price,
+						date: data.date,
+						price: data.price,
 				},
 			})
 		}
@@ -129,7 +128,7 @@ const createSparesContent = () => {
 						type='number'
 						placeholder='Пробег'
 					/>
-					{errors?.email?.type === 'required' && (
+					{errors?.mileage?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<input
@@ -139,7 +138,7 @@ const createSparesContent = () => {
 						})}
 						placeholder='Название'
 					/>
-					{errors?.email?.type === 'required' && (
+					{errors?.title?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<input
@@ -149,7 +148,7 @@ const createSparesContent = () => {
 						})}
 						placeholder='Цена'
 					/>
-					{errors?.email?.type === 'required' && (
+					{errors?.price?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<div className={style.icon}>
