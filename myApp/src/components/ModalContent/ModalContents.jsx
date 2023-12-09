@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { GiMechanicGarage } from 'react-icons/gi'
 import { FaGasPump, FaShopify } from 'react-icons/fa'
 
@@ -14,58 +16,13 @@ const createAccessoriesContent = () => {
 		} = useForm()
 		return (
 			<>
-					<form className={style.form}>
-						<input
-							className={style.input}
-							{...register('title', {
-								required: true,
-							})}
-							placeholder='Название'
-						/>
-						{errors?.email?.type === 'required' && (
-							<p className={style.err}>Это поле не может быть пустым</p>
-						)}
-						<input
-							className={style.input}
-							{...register('price', {
-								required: true,
-							})}
-							placeholder='Цена'
-						/>
-						{errors?.email?.type === 'required' && (
-							<p className={style.err}>Это поле не может быть пустым</p>
-						)}
-						<div className={style.icon}>
-							<FaShopify size={150} />
-						</div>
-						<div className={style.button}>
-							<button className={style.button_btn} type='submit'>
-								Добавить
-							</button>
-						</div>
-					</form>
-			</>
-		)
-	}
-
-	return <AccessoriesContent />
-}
-const createGasolineContent = () => {
-	const GasolineContent = () => {
-		const {
-			register,
-			handleSubmit,
-			formState: { errors },
-		} = useForm()
-		return (
-			<>
 				<form className={style.form}>
 					<input
 						className={style.input}
-						{...register('date', {
+						{...register('title', {
 							required: true,
 						})}
-						type='date'
+						placeholder='Название'
 					/>
 					{errors?.email?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
@@ -78,6 +35,67 @@ const createGasolineContent = () => {
 						placeholder='Цена'
 					/>
 					{errors?.email?.type === 'required' && (
+						<p className={style.err}>Это поле не может быть пустым</p>
+					)}
+					<div className={style.icon}>
+						<FaShopify size={150} />
+					</div>
+					<div className={style.button}>
+						<button className={style.button_btn} type='submit'>
+							Добавить
+						</button>
+					</div>
+				</form>
+			</>
+		)
+	}
+
+	return <AccessoriesContent />
+}
+const createGasolineContent = () => {
+	const GasolineContent = () => {
+		const dispatch = useDispatch()
+		const user = useSelector(state => state.user.user)
+		const {
+			register,
+			handleSubmit,
+			formState: { errors },
+		} = useForm()
+
+		const addGas = data => {
+			const { date, price } = data
+			const updCar = dispatch({
+				type: 'ADD_CAR_INFO',
+				payload: {
+					id: user._id,
+					date: date,
+					price: price,
+				},
+			})
+			localStorage.setItem('car', JSON.stringify(updCar.payload))
+		}
+
+		return (
+			<>
+				<form className={style.form} onSubmit={handleSubmit(addGas)}>
+					<input
+						className={style.input}
+						{...register('date', {
+							required: true,
+						})}
+						type='date'
+					/>
+					{errors?.date?.type === 'required' && (
+						<p className={style.err}>Это поле не может быть пустым</p>
+					)}
+					<input
+						className={style.input}
+						{...register('price', {
+							required: true,
+						})}
+						placeholder='Цена'
+					/>
+					{errors?.price?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<div className={style.icon}>
@@ -104,47 +122,47 @@ const createSparesContent = () => {
 		} = useForm()
 		return (
 			<>
-					<form className={style.form}>
-						<input
-							className={style.input}
-							{...register('mileage', {
-								required: true,
-							})}
-							type='number'
-							placeholder='Пробег'
-						/>
-						{errors?.email?.type === 'required' && (
-							<p className={style.err}>Это поле не может быть пустым</p>
-						)}
-						<input
-							className={style.input}
-							{...register('title', {
-								required: true,
-							})}
-							placeholder='Название'
-						/>
-						{errors?.email?.type === 'required' && (
-							<p className={style.err}>Это поле не может быть пустым</p>
-						)}
-						<input
-							className={style.input}
-							{...register('price', {
-								required: true,
-							})}
-							placeholder='Цена'
-						/>
-						{errors?.email?.type === 'required' && (
-							<p className={style.err}>Это поле не может быть пустым</p>
-						)}
-						<div className={style.icon}>
-							<GiMechanicGarage size={150} />
-						</div>
-						<div className={style.button}>
-							<button className={style.button_btn} type='submit'>
-								Добавить
-							</button>
-						</div>
-					</form>
+				<form className={style.form}>
+					<input
+						className={style.input}
+						{...register('mileage', {
+							required: true,
+						})}
+						type='number'
+						placeholder='Пробег'
+					/>
+					{errors?.email?.type === 'required' && (
+						<p className={style.err}>Это поле не может быть пустым</p>
+					)}
+					<input
+						className={style.input}
+						{...register('title', {
+							required: true,
+						})}
+						placeholder='Название'
+					/>
+					{errors?.email?.type === 'required' && (
+						<p className={style.err}>Это поле не может быть пустым</p>
+					)}
+					<input
+						className={style.input}
+						{...register('price', {
+							required: true,
+						})}
+						placeholder='Цена'
+					/>
+					{errors?.email?.type === 'required' && (
+						<p className={style.err}>Это поле не может быть пустым</p>
+					)}
+					<div className={style.icon}>
+						<GiMechanicGarage size={150} />
+					</div>
+					<div className={style.button}>
+						<button className={style.button_btn} type='submit'>
+							Добавить
+						</button>
+					</div>
+				</form>
 			</>
 		)
 	}

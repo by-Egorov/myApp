@@ -22,7 +22,6 @@ const Start = () => {
 		formState: { errors },
 	} = useForm()
 	const [selectedBrand, setSelectedBrand] = useState('')
-	const [userData, setUserData] = useState('')
 	const [selectedModel, setSelectedModel] = useState('')
 	const [selectedYear, setSelectedYear] = useState('')
 	const [selectedMileage, setSelectedMileage] = useState('')
@@ -31,7 +30,7 @@ const Start = () => {
 		const { email, password,  carYear, carMileage, carModel, carBrand } = data
 		try {
 			dispatch({
-				type: 'ADD_CAR',
+				type: 'ADD_USER',
 				payload: {
 					id: new Date(),
 					email: email,
@@ -60,8 +59,6 @@ const Start = () => {
 				carMileage: '',
 			})
 			console.log(response.data)
-			setUserData(response.data)
-			console.log(userData)
 			localStorage.setItem('user', JSON.stringify(response.data))
 			navigate('/')
 			window.location.reload()
