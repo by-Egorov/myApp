@@ -196,7 +196,7 @@ const Start = () => {
 							<button
 								className={style.start__button_btn}
 								type='submit'
-								disabled={!selectedYear}
+								disabled={!selectedMileage}
 							>
 								Начать
 							</button>
