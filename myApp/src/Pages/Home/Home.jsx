@@ -37,7 +37,7 @@ const Home = () => {
 	}
 	return (
 		<>
-			{user ? (
+			{!user ? (
 				<div className='container'>
 					<div
 						className={

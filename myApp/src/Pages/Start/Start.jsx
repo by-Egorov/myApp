@@ -81,8 +81,8 @@ const Start = () => {
 						Введите данные своей машины, и ведите учет расходов
 					</div>
 				</div>
-				<div className={style.start__inputs}>
-					<form onSubmit={handleSubmit(registration)}>
+				
+					<form className={style.start__form} onSubmit={handleSubmit(registration)}>
 						<input
 							className={style.select}
 							{...register('email', {
@@ -202,7 +202,7 @@ const Start = () => {
 							</button>
 						</div>
 					</form>
-				</div>
+				
 			</div>
 		</div>
 	)
