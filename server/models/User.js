@@ -1,4 +1,7 @@
 import mongoose from 'mongoose'
+import GasSchema from "./GasSchema.js"
+import SparesSchema from "./SparesSchema.js"
+import AccessoriesSchema from "./Accessories.js"
 
 const UserSchema = new mongoose.Schema(
     {
@@ -30,19 +33,9 @@ const UserSchema = new mongoose.Schema(
         carImage: {
             type: String,
         },
-        gas: {
-            date: {type: Number},
-            price: {type: Number}
-        },
-        spares: {
-            mileage: {type: Number},
-            title: {type: String},
-            price: {type: Number}
-        },
-        accessories: {
-            title: {type: Number},
-            price: {type: Number}
-        }
+        gas: [GasSchema],
+        spares: [SparesSchema],
+        accessories: [AccessoriesSchema]
     },
     {
         timestamps: true,

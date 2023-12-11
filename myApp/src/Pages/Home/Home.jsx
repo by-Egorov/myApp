@@ -14,10 +14,11 @@ import {
 } from '../../utils/Handlers/handlers.js'
 import Card from '../../components/Card/Card.jsx'
 import ModalContents from '../../components/ModalContent/ModalContents.jsx'
-import {$host} from "../../axios.js";
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
     const {register, handleSubmit} = useForm()
+    const navigate = useNavigate()
     const user = useSelector(state => state.user.user)
     const [addImage, setAddImage] = useState(false)
     const [selectedCardType, setSelectedCardType] = useState(null)
@@ -37,15 +38,9 @@ const Home = () => {
         setSelectedCardType(null)
     }
 
-    const [isMail, setIsMail] = useState('')
-    const getMail = async () => {
-        try {
-            const { data } = await $host.get('/user/me')
-            setIsMail(data.user)
-            console.log(isMail)
-        } catch (e) {
-            console.log(e)
-        }
+    const getEmail = async () => {
+        localStorage.removeItem('user')
+        navigate('/login')
     }
     return (
         <>
@@ -146,8 +141,7 @@ const Home = () => {
                                 button={<IoIosAddCircleOutline size={30}/>}
                             />
                         </div>
-                        <button onClick={getMail}>check email</button>
-                        {isMail && <p>{isMail}</p>}
+                        <button onClick={getEmail}>Log Out</button>
                     </div>
                     {selectedCardType && (
                         <Modal

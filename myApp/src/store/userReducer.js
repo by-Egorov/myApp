@@ -1,5 +1,5 @@
 const defaultState = {
-	user: JSON.parse(localStorage.getItem('user')) || null,
+	user: JSON.parse(localStorage.getItem('user')) || null
 }
 export const userReducer = (state = defaultState, action) => {
 	let newState
@@ -9,42 +9,6 @@ export const userReducer = (state = defaultState, action) => {
 				...state,
 				user: { ...state.user, ...action.payload },
 			}
-			localStorage.setItem('user', JSON.stringify(newState.user))
-			return newState
-
-		case 'ADD_GAS':
-			newState = {
-				...state,
-				user: {
-					...state.user,
-					gas: [...state.user.gas, { ...action.payload }]
-				},
-			}
-			
-			localStorage.setItem('user', JSON.stringify(newState.user))
-			return newState
-
-		case 'ADD_SPARES':
-			newState = {
-				...state,
-				user: {
-					...state.user,
-					gas: [...state.user.spares, { ...action.payload }]
-				},
-			}
-
-			localStorage.setItem('user', JSON.stringify(newState.user))
-			return newState
-
-		case 'ADD_ACCESSORIES':
-			newState = {
-				...state,
-				user: {
-					...state.user,
-					gas: [...state.user.accessories, { ...action.payload }]
-				},
-			}
-
 			localStorage.setItem('user', JSON.stringify(newState.user))
 			return newState
 

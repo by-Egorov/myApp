@@ -39,6 +39,9 @@ const Register = () => {
                     carModel: carModel,
                     carYear: carYear,
                     carMileage: carMileage,
+                    gas: [],
+                    spares: [],
+                    accessories: []
                 },
             })
 
@@ -222,10 +225,7 @@ const Register = () => {
                             {location.pathname === '/register' ? 'Начать' : 'Войти'}
                         </button>
                     </div>
-                    {location.pathname === '/register' && <Link to='/login'
-                    >
-                        Войти
-                    </Link>}
+                    {location.pathname === '/register' ? <Link to='/login'>Login</Link> : <Link to='/register'>Register</Link>}
                 </form>
             </div>
         </div>
