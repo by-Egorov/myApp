@@ -7,13 +7,14 @@ import {IoIosAddCircleOutline, IoMdSpeedometer} from 'react-icons/io'
 import style from './Home.module.scss'
 import preloadCar from '../../assets/preloadCar.svg'
 import Modal from '../../components/AddInfo/Modal.jsx'
-import Start from '../Start/Start.jsx'
+import Register from '../Registration/Register.jsx'
 import {
     handleResetImage,
     handleShowAddImage,
 } from '../../utils/Handlers/handlers.js'
 import Card from '../../components/Card/Card.jsx'
 import ModalContents from '../../components/ModalContent/ModalContents.jsx'
+import {$host} from "../../axios.js";
 
 const Home = () => {
     const {register, handleSubmit} = useForm()
@@ -35,7 +36,17 @@ const Home = () => {
     const handleModalClose = () => {
         setSelectedCardType(null)
     }
-    console.log(user)
+
+    const [isMail, setIsMail] = useState('')
+    const getMail = async () => {
+        try {
+            const { data } = await $host.get('/user/me')
+            setIsMail(data.user)
+            console.log(isMail)
+        } catch (e) {
+            console.log(e)
+        }
+    }
     return (
         <>
             {user ? (
@@ -135,6 +146,8 @@ const Home = () => {
                                 button={<IoIosAddCircleOutline size={30}/>}
                             />
                         </div>
+                        <button onClick={getMail}>check email</button>
+                        {isMail && <p>{isMail}</p>}
                     </div>
                     {selectedCardType && (
                         <Modal
@@ -144,7 +157,7 @@ const Home = () => {
                     )}
                 </div>
             ) : (
-                <Start/>
+                <Register/>
             )}
         </>
     )

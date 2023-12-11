@@ -30,6 +30,19 @@ const UserSchema = new mongoose.Schema(
         carImage: {
             type: String,
         },
+        gas: {
+            date: {type: Number},
+            price: {type: Number}
+        },
+        spares: {
+            mileage: {type: Number},
+            title: {type: String},
+            price: {type: Number}
+        },
+        accessories: {
+            title: {type: Number},
+            price: {type: Number}
+        }
     },
     {
         timestamps: true,

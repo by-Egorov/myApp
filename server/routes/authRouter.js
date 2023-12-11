@@ -2,8 +2,9 @@ import Router from 'express'
 import { check } from 'express-validator'
 import {
     login,
-    register,
+    register
 } from '../controllers/authController.js'
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = new Router()
 router.post(
@@ -28,5 +29,4 @@ router.post(
     ],
     login
 )
-
 export default router
