@@ -4,7 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import authRouter from './routes/authRouter.js'
 import authMiddleware from "./middleware/authMiddleware.js";
-import User from "./models/User.js";
+
 
 const PORT = process.env.PORT || 5555
 const db = process.env.DB_NAME
@@ -22,17 +22,6 @@ mongoose
 app.use(express.json())
 app.use(cors())
 
-app.get('/api/user/me', authMiddleware, async (req, res) => {
-	try {
-		const user = await User.findById(req.user.id)
-		return res.json({user})
-	} catch (e) {
-		console.log(e)
-		res.status(400).json({
-			message: 'Get Users error',
-		})
-	}
-})
 app.use('/api', authRouter)
 
 app.listen(PORT, error => {

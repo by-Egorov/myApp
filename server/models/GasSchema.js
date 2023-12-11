@@ -5,4 +5,4 @@ const GasSchema = new mongoose.Schema({
     price: { type: Number }
 });
 
-export default GasSchema;
+export default mongoose.model('gas', GasSchema)

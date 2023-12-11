@@ -6,4 +6,4 @@ const SparesSchema = new mongoose.Schema({
     price: { type: Number }
 });
 
-export default SparesSchema;
+export default mongoose.model('spares', SparesSchema)

@@ -2,7 +2,9 @@ import Router from 'express'
 import { check } from 'express-validator'
 import {
     login,
-    register
+    register,
+    getUser,
+    updUser
 } from '../controllers/authController.js'
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -29,4 +31,6 @@ router.post(
     ],
     login
 )
+router.get('/user/me', authMiddleware, getUser)
+router.path('/user/update', authMiddleware, updUser)
 export default router

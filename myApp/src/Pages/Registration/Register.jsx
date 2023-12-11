@@ -78,10 +78,9 @@ const Register = () => {
                 email,
                 password
             })
-            console.log(response.data)
             localStorage.setItem('user', JSON.stringify(response.data))
             localStorage.setItem('token', JSON.stringify(response.data.token))
-            navigate('/')
+            navigate(`/${response.data._id}`)
             if (!response) {
                 console.warn('Ошибка авторизации')
             }

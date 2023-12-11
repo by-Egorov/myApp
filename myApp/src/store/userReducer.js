@@ -12,6 +12,42 @@ export const userReducer = (state = defaultState, action) => {
 			localStorage.setItem('user', JSON.stringify(newState.user))
 			return newState
 
+		case 'ADD_GAS':
+			newState = {
+				...state,
+				user: {
+					...state.user,
+					gas: [...state.user.gas, { ...action.payload }]
+				},
+			}
+
+			localStorage.setItem('user', JSON.stringify(newState.user))
+			return newState
+
+		case 'ADD_SPARES':
+			newState = {
+				...state,
+				user: {
+					...state.user,
+					gas: [...state.user.spares, { ...action.payload }]
+				},
+			}
+
+			localStorage.setItem('user', JSON.stringify(newState.user))
+			return newState
+
+		case 'ADD_ACCESSORIES':
+			newState = {
+				...state,
+				user: {
+					...state.user,
+					gas: [...state.user.accessories, { ...action.payload }]
+				},
+			}
+
+			localStorage.setItem('user', JSON.stringify(newState.user))
+			return newState
+
 		default:
 			return state
 	}

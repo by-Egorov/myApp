@@ -5,4 +5,4 @@ const AccessoriesSchema = new mongoose.Schema({
     price: { type: Number }
 });
 
-export default AccessoriesSchema;
+export default mongoose.model('accessories', AccessoriesSchema)
