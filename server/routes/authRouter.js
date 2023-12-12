@@ -32,5 +32,5 @@ router.post(
     login
 )
 router.get('/user/me', authMiddleware, getUser)
-router.path('/user/update', authMiddleware, updUser)
+router.put('/user/update', authMiddleware, updUser)
 export default router

@@ -64,7 +64,8 @@ const Register = () => {
             })
             console.log(response.data)
             localStorage.setItem('user', JSON.stringify(response.data))
-            navigate('/login')
+            localStorage.setItem('token', JSON.stringify(response.data.token))
+            navigate(`/user/${response.data._id}`)
             window.location.reload()
         } catch (e) {
             alert(e)
@@ -78,9 +79,10 @@ const Register = () => {
                 email,
                 password
             })
+
             localStorage.setItem('user', JSON.stringify(response.data))
             localStorage.setItem('token', JSON.stringify(response.data.token))
-            navigate(`/${response.data._id}`)
+            navigate(`/user/${response.data._id}`)
             if (!response) {
                 console.warn('Ошибка авторизации')
             }
