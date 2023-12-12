@@ -10,7 +10,7 @@ import {
     handleModelChange,
     handleYearChange,
 } from '../../utils/Handlers/handleChange.js'
-import {$authHost, $host} from '../../axios.js'
+import { $host} from '../../axios.js'
 
 const Register = () => {
     const navigate = useNavigate()
@@ -65,7 +65,7 @@ const Register = () => {
             console.log(response.data)
             localStorage.setItem('user', JSON.stringify(response.data))
             localStorage.setItem('token', JSON.stringify(response.data.token))
-            navigate(`/user/${response.data._id}`)
+            navigate('/')
             window.location.reload()
         } catch (e) {
             alert(e)
@@ -82,7 +82,7 @@ const Register = () => {
 
             localStorage.setItem('user', JSON.stringify(response.data))
             localStorage.setItem('token', JSON.stringify(response.data.token))
-            navigate(`/user/${response.data._id}`)
+            navigate('/')
             if (!response) {
                 console.warn('Ошибка авторизации')
             }
