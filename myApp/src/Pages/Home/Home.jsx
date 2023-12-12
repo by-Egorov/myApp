@@ -1,6 +1,4 @@
-import Modal from '../../components/AddInfo/Modal.jsx'
 import Register from '../Registration/Register.jsx'
-import ModalContents from '../../components/ModalContent/ModalContents.jsx'
 import UserData from "../../components/UserData/UserData.jsx"
 import {useSelector} from "react-redux";
 
