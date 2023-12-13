@@ -1,7 +1,6 @@
 import style from './Card.module.scss'
 
-const Card = ({ title, icon, bodyContent, button, handleClick }) => {
-	
+const Card = ({ title, icon, bodyContent, buttonAdd, buttonMore, handleClick, handleCardOpen }) => {
 	return (
 		<div className={style.card}>
 			<div className={style.card_title}>
@@ -9,12 +8,11 @@ const Card = ({ title, icon, bodyContent, button, handleClick }) => {
 				{icon}
 			</div>
 			<div className={style.card__body}>
-				<div className={style.card__body_content}>
-					{bodyContent}
-				</div>
+				<div className={style.card__body_content}>{bodyContent}</div>
 			</div>
-			<div className={style.card__btn} onClick={handleClick}>
-				{button}
+			<div className={style.card__btn}>
+				<div onClick={handleClick}>{buttonAdd}</div>
+				<div onClick={handleCardOpen}>{buttonMore}</div>
 			</div>
 		</div>
 	)

@@ -5,6 +5,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+ul > li {
+  list-style: none;
+}
 #root {
   font-family: 'Mulish', sans-serif;
   width: 100vw;

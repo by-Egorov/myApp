@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Register from './Pages/Registration/Register.jsx'
 import Home from './Pages/Home/Home'
 import CardDescription from './Pages/CardDescription/CardDescription'
-import UserData from "./components/UserData/UserData.jsx";
 
 const App = () => {
 	return (

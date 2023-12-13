@@ -27,7 +27,8 @@
     }
   }
   &__btn {
-
-    align-self: center;
+    display: flex;
+   justify-content: center;
+   gap: 20px;
   }
 }

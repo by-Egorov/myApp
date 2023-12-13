@@ -10,9 +10,12 @@ const Modal = ({ cardContent, onClick }) => {
 	})
 	return (
 		<animated.div style={animation} className={style.modal}>
-			<IoIosArrowDown size={30} onClick={onClick} />
+			<div className={style.modal__close}><IoIosArrowDown size={30} onClick={onClick} /></div>
 
-			<div className={style.modal__content}>{cardContent}</div>
+			<div className={style.modal__content}>
+				{cardContent}
+				<button>Reset</button>
+				</div>
 		</animated.div>
 	)
 }

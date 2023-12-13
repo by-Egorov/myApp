@@ -1,9 +1,9 @@
+import style from './Register.module.scss'
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
-import carData from '../../utils/carData.json'
-import style from './Register.module.scss'
 import {Link, useLocation, useNavigate} from 'react-router-dom'
 import {useForm} from 'react-hook-form'
+import carData from '../../utils/carData.json'
 import {
     handleBrandChange,
     handleMileageChange,

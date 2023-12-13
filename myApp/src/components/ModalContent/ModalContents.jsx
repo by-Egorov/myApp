@@ -2,7 +2,8 @@ import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { GiMechanicGarage } from 'react-icons/gi'
-import { FaGasPump, FaShopify } from 'react-icons/fa'
+import { FaShopify } from 'react-icons/fa'
+import { PiGasCanFill } from 'react-icons/pi'
 
 import style from './ModalContents.module.scss'
 import { $authHost } from '../../axios.js'
@@ -59,29 +60,33 @@ const createGasolineContent = () => {
 		const {
 			register,
 			handleSubmit,
+			reset,
 			formState: { errors },
 		} = useForm()
 
-
 		const addGas = async data => {
 			try {
-				// dispatch({
-				//     type: 'ADD_GAS',
-				//     payload: {
-				//         date: data.date,
-				//         price: data.price,
-				//     },
-				// })
-				const response = await $authHost.put(`/user/update`, {
+				dispatch({
+					type: 'ADD_GAS',
+					payload: {
+						date: data.date,
+						price: data.price,
+					},
+				})
+				await $authHost.put(`/user/update`, {
 					userId: user._id,
 					update: {
 						gas: {
-                            date: data.date,
-                            price: data.price
-                        }
+							date: data.date,
+							price: data.price,
+						},
 					},
 				})
-				console.log(response.data)
+				const emptyFormData = {
+					date: '',
+					price: '',
+				}
+				reset(emptyFormData)
 			} catch (e) {
 				console.warn(e)
 			}
@@ -111,7 +116,7 @@ const createGasolineContent = () => {
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<div className={style.icon}>
-						<FaGasPump size={150} />
+						<PiGasCanFill size={150} />
 					</div>
 					<div className={style.button}>
 						<button className={style.button_btn} type='submit'>
