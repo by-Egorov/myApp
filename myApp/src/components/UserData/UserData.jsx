@@ -69,7 +69,7 @@ const UserData = () => {
 					<ul>
 						<li>{user.carBrand}</li>
 						<li>{user.carModel}</li>
-						<li>{user.carYear} year</li>
+						<li>{user.carYear} год</li>
 					</ul>
 				</div>
 				<div className={style.home__image}>
@@ -80,7 +80,7 @@ const UserData = () => {
 						>
 							<img src={userCarImage} alt='userCarImage' />
 							<button onClick={() => handleResetImage(setUserCarImage)}>
-								reset
+								сбросить
 							</button>
 						</div>
 					) : (
@@ -98,7 +98,7 @@ const UserData = () => {
 									<div>
 										<form onSubmit={handleSubmit(handleAddImage)}>
 											<input {...register('image')} />
-											<button type='submit'>send</button>
+											<button type='submit'>отправить</button>
 										</form>
 									</div>
 								)}
@@ -108,11 +108,11 @@ const UserData = () => {
 				</div>
 				<div className={style.home__cards}>
 					<Card
-						title='Spares'
+						title='Запчасти'
 						icon={<GiMechanicGarage size={50} />}
 						bodyContent={
 							<>
-								<div className={style.card__body_title}>Total price:</div>
+								<div className={style.card__body_title}>Сумма:</div>
 								<div className={style.card__body_sum}>
                                 {user.spares &&
 										Array.from(user.spares).reduce(
@@ -129,11 +129,11 @@ const UserData = () => {
 						buttonMore={<CiCircleMore size={30} />}
 					/>
 					<Card
-						title='Gasoline'
+						title='Бензин'
 						icon={<PiGasCanFill size={50} />}
 						bodyContent={
 							<>
-								<div className={style.card__body_title}>Total price:</div>
+								<div className={style.card__body_title}>Сумма:</div>
 								<div className={style.card__body_sum}>
 									{user.gas &&
 										Array.from(user.gas).reduce(
@@ -150,20 +150,20 @@ const UserData = () => {
                         buttonMore={<CiCircleMore size={30} />}
 					/>
 					<Card
-						title='Mileage'
+						title='Пробег'
 						icon={<IoMdSpeedometer size={50} />}
 						bodyContent={
 							<>
-								<span> {user.carMileage} km </span>
+								<span> {user.carMileage} км </span>
 							</>
 						}
 					/>
 					<Card
-						title='Accessories'
+						title='Аксессуары'
 						icon={<FaShopify size={50} />}
 						bodyContent={
 							<>
-								<div className={style.card__body_title}>Total price:</div>
+								<div className={style.card__body_title}>Сумма:</div>
 								<div className={style.card__body_sum}>
                                 {user.accessories &&
 										Array.from(user.accessories).reduce(
@@ -180,7 +180,7 @@ const UserData = () => {
                         buttonMore={<CiCircleMore size={30} />}
 					/>
 				</div>
-				<button onClick={logOut}>Log Out</button>
+				<button onClick={logOut}>Выйти</button>
 			</div>
 			{selectedCardType && (
 				<Modal
