@@ -10,14 +10,53 @@ import { $authHost } from '../../axios.js'
 
 const createAccessoriesContent = () => {
 	const AccessoriesContent = () => {
+        const dispatch = useDispatch()
 		const {
 			register,
 			handleSubmit,
+			reset,
 			formState: { errors },
 		} = useForm()
+
+		const addDataUser = async (arrayType, title, price) => {
+			try {
+				const response = await $authHost.patch('/user/update', {
+					arrayType,
+					title,
+					price,
+				})
+
+				console.log(response.data)
+			} catch (error) {
+				console.error('Ошибка при добавлении данных на сервер:', error)
+			}
+		}
+
+		const addGas = async data => {
+			const selectedType = 'accessories'
+			const selectedTitle = data.title
+			const selectedPrice = data.price
+			try {
+				addDataUser(selectedType, selectedTitle, selectedPrice)
+				dispatch({
+					type: 'ADD_ACCESSORIES',
+					payload: {
+						title: data.title,
+						price: Number(data.price),
+					},
+				})
+				const emptyFormData = {
+					title: '',
+					price: '',
+				}
+				reset(emptyFormData)
+			} catch (e) {
+				console.warn(e)
+			}
+		}
 		return (
 			<>
-				<form className={style.form}>
+				<form className={style.form} onSubmit={handleSubmit(addGas)}>
 					<input
 						className={style.input}
 						{...register('title', {
@@ -56,7 +95,6 @@ const createAccessoriesContent = () => {
 const createGasolineContent = () => {
 	const GasolineContent = () => {
 		const dispatch = useDispatch()
-		const user = useSelector(state => state.user.user)
 		const {
 			register,
 			handleSubmit,
@@ -64,22 +102,31 @@ const createGasolineContent = () => {
 			formState: { errors },
 		} = useForm()
 
-		const addGas = async data => {
+		const addDataUser = async (arrayType, date, price) => {
 			try {
+				const response = await $authHost.patch('/user/update', {
+					arrayType,
+					date,
+					price,
+				})
+
+				console.log(response.data)
+			} catch (error) {
+				console.error('Ошибка при добавлении данных на сервер:', error)
+			}
+		}
+
+		const addGas = async data => {
+			const selectedType = 'gas'
+			const selectedDate = data.date
+			const selectedPrice = data.price
+			try {
+				addDataUser(selectedType, selectedDate, selectedPrice)
 				dispatch({
 					type: 'ADD_GAS',
 					payload: {
 						date: data.date,
-						price: data.price,
-					},
-				})
-				await $authHost.put(`/user/update`, {
-					userId: user._id,
-					update: {
-						gas: {
-							date: data.date,
-							price: data.price,
-						},
+						price: Number(data.price),
 					},
 				})
 				const emptyFormData = {
@@ -110,6 +157,7 @@ const createGasolineContent = () => {
 						{...register('price', {
 							required: true,
 						})}
+						type='number'
 						placeholder='Цена'
 					/>
 					{errors?.price?.type === 'required' && (
@@ -132,14 +180,57 @@ const createGasolineContent = () => {
 }
 const createSparesContent = () => {
 	const SparesContent = () => {
+		const dispatch = useDispatch()
+		const user = useSelector(state => state.user.user)
 		const {
 			register,
 			handleSubmit,
+			reset,
 			formState: { errors },
 		} = useForm()
+        const addDataUser = async (arrayType, mileage, title, price) => {
+            try {
+              const response = await $authHost.patch('/user/update', {
+                arrayType,
+                mileage,
+                title,
+                price
+              });
+          
+              console.log(response.data);
+            } catch (error) {
+              console.error('Ошибка при добавлении данных на сервер:', error);
+            }
+          }
+
+		const addGas = async data => {
+			const selectedType = 'spares'
+			const selectedMileage = data.mileage
+			const selectedTitle = data.title
+			const selectedPrice = data.price
+			try {
+				addDataUser(selectedType, selectedMileage, selectedTitle, selectedPrice)
+				dispatch({
+					type: 'ADD_SPARES',
+					payload: {
+						mileage: data.mileage,
+						title: data.title,
+						price: Number(data.price),
+					},
+				})
+				const emptyFormData = {
+					mileage: '',
+					title: '',
+					price: '',
+				}
+				reset(emptyFormData)
+			} catch (e) {
+				console.warn(e)
+			}
+		}
 		return (
 			<>
-				<form className={style.form}>
+				<form className={style.form} onSubmit={handleSubmit(addGas)}>
 					<input
 						className={style.input}
 						{...register('mileage', {
@@ -166,6 +257,7 @@ const createSparesContent = () => {
 						{...register('price', {
 							required: true,
 						})}
+						type='number'
 						placeholder='Цена'
 					/>
 					{errors?.price?.type === 'required' && (

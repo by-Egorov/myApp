@@ -29,7 +29,7 @@ export const userReducer = (state = defaultState, action) => {
 				...state,
 				user: {
 					...state.user,
-					gas: [...state.user.spares, { ...action.payload }]
+					spares: [...state.user.spares, { ...action.payload }]
 				},
 			}
 
@@ -41,7 +41,7 @@ export const userReducer = (state = defaultState, action) => {
 				...state,
 				user: {
 					...state.user,
-					gas: [...state.user.accessories, { ...action.payload }]
+					accessories: [...state.user.accessories, { ...action.payload }]
 				},
 			}
 

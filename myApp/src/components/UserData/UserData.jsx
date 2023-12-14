@@ -113,7 +113,14 @@ const UserData = () => {
 						bodyContent={
 							<>
 								<div className={style.card__body_title}>Total price:</div>
-								<div className={style.card__body_sum}>2300 р</div>
+								<div className={style.card__body_sum}>
+                                {user.spares &&
+										Array.from(user.spares).reduce(
+											(acc, rec) => acc + rec.price,
+											0
+										)}
+                                        р.
+                                </div>
 							</>
 						}
 						handleClick={() => handleCardClick('spares')}
@@ -130,14 +137,13 @@ const UserData = () => {
 								<div className={style.card__body_sum}>
 									{user.gas &&
 										Array.from(user.gas).reduce(
-											(acc, rec) => acc + Number(rec.price),
+											(acc, rec) => acc + rec.price,
 											0
 										)}
 									р.
 								</div>
 							</>
 						}
-						cardContent={<></>}
 						handleCardOpen={() => handleCardOpen('gasolineCard')}
 						handleClick={() => handleCardClick('gasoline')}
 						buttonAdd={<IoIosAddCircleOutline size={30} />}
@@ -158,7 +164,14 @@ const UserData = () => {
 						bodyContent={
 							<>
 								<div className={style.card__body_title}>Total price:</div>
-								<div className={style.card__body_sum}>2300 р</div>
+								<div className={style.card__body_sum}>
+                                {user.accessories &&
+										Array.from(user.accessories).reduce(
+											(acc, rec) => acc + rec.price,
+											0
+										)}
+                                        р.
+                                </div>
 							</>
 						}
 						handleCardOpen={() => handleCardOpen('accessoriesCard')}

@@ -6,7 +6,30 @@ import { PiGasCanFill } from 'react-icons/pi'
 
 const createAccessoriesContent = () => {
 	const AccessoriesContent = () => {
-		return <></>
+		const user = useSelector(state => state.user.user)
+		const dataUser = Array.from(user.accessories)
+		return (
+		<>
+		<div className={style.content}>
+					<div className={style.content__header}>
+						<div className={style.content__header_title}>
+							<span>Название</span>
+							<span>Цена</span>
+						</div>
+					</div>
+					<div className={style.content__info}>
+						{dataUser.length > 0 ? (dataUser.map(item => (
+							<div className={style.content__info_item} key={item._id}>
+							<span>{item.title}</span> <span>{item.price} р</span>
+							</div>
+						))) : <span> Пока пусто</span>}
+					</div>
+					<div className={style.content__icon}>
+						<FaShopify size={300} />
+					</div>
+				</div>
+		</>
+		)
 	}
 
 	return <AccessoriesContent />
@@ -17,21 +40,21 @@ const createGasolineContent = () => {
 		const dataUser = Array.from(user.gas)
 		return (
 			<>
-				<div className={style.gas}>
-					<div className={style.gas__header}>
-						<div className={style.gas__header_title}>
+				<div className={style.content}>
+					<div className={style.content__header}>
+						<div className={style.content__header_title}>
 							<span>Дата</span>
 							<span>Цена</span>
 						</div>
 					</div>
-					<div className={style.gas__info}>
-							{dataUser.map((item) => (
-								<>
-									<div className={style.gas__info_item}><span>{item.date}</span> <span>{item.price} р</span></div>
-								</>
-							))}
-						</div>
-					<div className={style.gas__icon}>
+					<div className={style.content__info}>
+						{dataUser.length > 0 ? (dataUser.map(item => (
+							<div className={style.content__info_item} key={item._id}>
+								<span>{item.date}</span> <span>{item.price} р</span>
+							</div>
+						))) : <div> Пока пусто</div>}
+					</div>
+					<div className={style.content__icon}>
 						<PiGasCanFill size={300} />
 					</div>
 				</div>
@@ -43,7 +66,31 @@ const createGasolineContent = () => {
 }
 const createSparesContent = () => {
 	const SparesContent = () => {
-		return <></>
+		const user = useSelector(state => state.user.user)
+		const dataUser = Array.from(user.spares)
+		return (
+		<>
+		<div className={style.content}>
+					<div className={style.content__header}>
+						<div className={style.content__header_title}>
+							<span>Пробег</span>
+							<span>Название</span>
+							<span>Цена</span>
+						</div>
+					</div>
+					<div className={style.content__info}>
+						{dataUser.length > 0 ? (dataUser.map(item => (
+							<div className={style.content__info_item} key={item._id}>
+							<span>{item.mileage}</span>	<span>{item.title}</span> <span>{item.price} р</span>
+							</div>
+						))) :  <div> Пока пусто</div>}
+					</div>
+					<div className={style.content__icon}>
+						<GiMechanicGarage size={300} />
+					</div>
+				</div>
+		</>
+		)
 	}
 
 	return <SparesContent />

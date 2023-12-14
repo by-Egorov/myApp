@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import accessories from "./Accessories.js";
 
 
 const UserSchema = new mongoose.Schema(
@@ -34,22 +33,38 @@ const UserSchema = new mongoose.Schema(
         },
         gas: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'gas'
+                date: {
+                    type: Date,
+                },
+                price: {
+                    type: Number,
+                }
             }
-        ],
+        ]
+        ,
         spares: [
 
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'spares'
+                mileage: {
+                    type: Number,
+                },
+                title: {
+                    type: String,
+                },
+                price: {
+                    type: Number,
+                }
             }
 
         ],
         accessories: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'accessories'
+                title: {
+                    type: String,
+                },
+                price: {
+                    type: Number,
+                }
             }
         ]
     },

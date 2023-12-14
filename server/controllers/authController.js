@@ -82,8 +82,13 @@ export const login = async (req, res) => {
 // Get User
 export const getUser = async (req, res) => {
 	try {
-		const user = await User.findById(req.user.id)
-		return res.json({ user })
+		if (req.user && req.user.id) {
+			const userId = req.user.id
+			const user = await User.findById(userId)
+			return res.json(user)
+		} else {
+			res.status(401).json({ error: 'Пользователь не авторизован' })
+		}
 	} catch (e) {
 		console.log(e)
 		res.status(400).json({
@@ -93,16 +98,28 @@ export const getUser = async (req, res) => {
 }
 //Update
 export const updUser = async (req, res) => {
-    const userId = req.user.id
-	const update = req.body
+	const userId = req.user.id
+	const { arrayType, date, price, title, mileage } = req.body
 	try {
-		//Поиск пользователя по I'd
-		const user = await User.findByIdAndUpdate(userId, update, {
-            new: true
-        })
-		console.log(update) // Возвращает userId и поле update
-        console.log(userId) // undefined
-		console.log(user) // null
+		let updateObject = {}
+
+		switch (arrayType) {
+			case 'gas':
+				updateObject = { $addToSet: { gas: { date, price } } }
+				break
+			case 'accessories':
+				updateObject = { $addToSet: { accessories: { title, price } } }
+				break
+			case 'spares':
+				updateObject = { $addToSet: { spares: { mileage, title, price } } }
+				break
+			default:
+				return res.status(400).json({ error: 'Некорректный тип массива' })
+		}
+		const user = await User.findByIdAndUpdate(userId, updateObject, {
+			new: true,
+		})
+
 		res.json(user)
 	} catch (error) {
 		console.error('Ошибка при обновлении данных пользователя:', error)

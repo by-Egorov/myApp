@@ -14,7 +14,6 @@ const Modal = ({ cardContent, onClick }) => {
 
 			<div className={style.modal__content}>
 				{cardContent}
-				<button>Reset</button>
 				</div>
 		</animated.div>
 	)
