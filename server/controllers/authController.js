@@ -97,9 +97,9 @@ export const getUser = async (req, res) => {
 	}
 }
 //Update
-export const updUser = async (req, res) => {
+export const updateUserData = async (req, res) => {
 	const userId = req.user.id
-	const { arrayType, date, price, title, mileage } = req.body
+	const { arrayType, date, price, title, mileage, carMileage } = req.body
 	try {
 		let updateObject = {}
 
@@ -124,5 +124,18 @@ export const updUser = async (req, res) => {
 	} catch (error) {
 		console.error('Ошибка при обновлении данных пользователя:', error)
 		res.status(500).json({ error: 'Ошибка при обновлении данных пользователя' })
+	}
+}
+export const updateUser = async (req, res) => {
+	const userId = req.user.id
+	const update = req.body
+	try {
+		const user = await User.findByIdAndUpdate(userId, update, {
+			new: true 
+		})
+		console.log(update)
+		console.log(user)
+	} catch (error) {
+		console.log(error)
 	}
 }

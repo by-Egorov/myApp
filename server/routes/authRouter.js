@@ -4,7 +4,8 @@ import {
     login,
     register,
     getUser,
-    updUser
+    updateUserData,
+    updateUser
 } from '../controllers/authController.js'
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -32,5 +33,6 @@ router.post(
     login
 )
 router.get('/user/me',authMiddleware, getUser)
-router.patch('/user/update', authMiddleware, updUser)
+router.patch('/user/update-data', authMiddleware, updateUserData)
+router.patch('/user/update', authMiddleware, updateUser)
 export default router

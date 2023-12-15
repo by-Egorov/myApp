@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { GiMechanicGarage } from 'react-icons/gi'
 import { FaShopify } from 'react-icons/fa'
@@ -20,7 +19,7 @@ const createAccessoriesContent = () => {
 
 		const addDataUser = async (arrayType, title, price) => {
 			try {
-				const response = await $authHost.patch('/user/update', {
+				const response = await $authHost.patch('/user/update-data', {
 					arrayType,
 					title,
 					price,
@@ -104,7 +103,7 @@ const createGasolineContent = () => {
 
 		const addDataUser = async (arrayType, date, price) => {
 			try {
-				const response = await $authHost.patch('/user/update', {
+				const response = await $authHost.patch('/user/update-data', {
 					arrayType,
 					date,
 					price,
@@ -181,7 +180,6 @@ const createGasolineContent = () => {
 const createSparesContent = () => {
 	const SparesContent = () => {
 		const dispatch = useDispatch()
-		const user = useSelector(state => state.user.user)
 		const {
 			register,
 			handleSubmit,
@@ -190,7 +188,7 @@ const createSparesContent = () => {
 		} = useForm()
         const addDataUser = async (arrayType, mileage, title, price) => {
             try {
-              const response = await $authHost.patch('/user/update', {
+              const response = await $authHost.patch('/user/update-data', {
                 arrayType,
                 mileage,
                 title,
@@ -205,11 +203,12 @@ const createSparesContent = () => {
 
 		const addGas = async data => {
 			const selectedType = 'spares'
-			const selectedMileage = data.mileage
+			const selectedMileage = Number(data.mileage)
 			const selectedTitle = data.title
 			const selectedPrice = data.price
 			try {
 				addDataUser(selectedType, selectedMileage, selectedTitle, selectedPrice)
+                
 				dispatch({
 					type: 'ADD_SPARES',
 					payload: {
@@ -223,7 +222,14 @@ const createSparesContent = () => {
 					title: '',
 					price: '',
 				}
+
+                const updateUser = await $authHost.patch('/user/update', {
+                        carMileage: selectedMileage
+                })
+                confirm.log(updateUser)
+                // localStorage.setItem('mileage', JSON.stringify(selectedMileage))
 				reset(emptyFormData)
+
 			} catch (e) {
 				console.warn(e)
 			}
