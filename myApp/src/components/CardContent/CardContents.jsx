@@ -25,7 +25,7 @@ const createAccessoriesContent = () => {
 								</div>
 							))
 						) : (
-							<span> Пока пусто</span>
+							<div className={style.content__info_null}> Пока пусто</div>
 						)}
 					</div>
 					<div className={style.content__icon}>
@@ -71,7 +71,7 @@ const createGasolineContent = () => {
 								)
 							})
 						) : (
-							<div> Пока пусто</div>
+							<div className={style.content__info_null}> Пока пусто</div>
 						)}
 					</div>
 					<div className={style.content__icon}>
@@ -107,7 +107,7 @@ const createSparesContent = () => {
 								</div>
 							))
 						) : (
-							<div> Пока пусто</div>
+							<div className={style.content__info_null}> Пока пусто</div>
 						)}
 					</div>
 					<div className={style.content__icon}>
