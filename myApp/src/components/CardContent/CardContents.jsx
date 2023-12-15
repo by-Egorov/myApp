@@ -9,8 +9,8 @@ const createAccessoriesContent = () => {
 		const user = useSelector(state => state.user.user)
 		const dataUser = Array.from(user.accessories)
 		return (
-		<>
-		<div className={style.content}>
+			<>
+				<div className={style.content}>
 					<div className={style.content__header}>
 						<div className={style.content__header_title}>
 							<span>Название</span>
@@ -18,17 +18,21 @@ const createAccessoriesContent = () => {
 						</div>
 					</div>
 					<div className={style.content__info}>
-						{dataUser.length > 0 ? (dataUser.map(item => (
-							<div className={style.content__info_item} key={item._id}>
-							<span>{item.title}</span> <span>{item.price} р</span>
-							</div>
-						))) : <span> Пока пусто</span>}
+						{dataUser.length > 0 ? (
+							dataUser.map(item => (
+								<div className={style.content__info_item} key={item._id}>
+									<span>{item.title}</span> <span>{item.price} р</span>
+								</div>
+							))
+						) : (
+							<span> Пока пусто</span>
+						)}
 					</div>
 					<div className={style.content__icon}>
 						<FaShopify size={300} />
 					</div>
 				</div>
-		</>
+			</>
 		)
 	}
 
@@ -48,11 +52,27 @@ const createGasolineContent = () => {
 						</div>
 					</div>
 					<div className={style.content__info}>
-						{dataUser.length > 0 ? (dataUser.map(item => (
-							<div className={style.content__info_item} key={item._id}>
-								<span>{item.date}</span> <span>{item.price} р</span>
-							</div>
-						))) : <div> Пока пусто</div>}
+						{dataUser.length > 0 ? (
+							dataUser.map(item => {
+								const dateObject = new Date(item.date)
+								const options = {
+									year: 'numeric',
+									month: 'long',
+									day: 'numeric',
+								}
+								const formattedDate = dateObject.toLocaleDateString(
+									'ru-RU',
+									options
+								)
+								return (
+									<div className={style.content__info_item} key={item._id}>
+										<span>{formattedDate}</span> <span>{item.price} р</span>
+									</div>
+								)
+							})
+						) : (
+							<div> Пока пусто</div>
+						)}
 					</div>
 					<div className={style.content__icon}>
 						<PiGasCanFill size={300} />
@@ -69,8 +89,8 @@ const createSparesContent = () => {
 		const user = useSelector(state => state.user.user)
 		const dataUser = Array.from(user.spares)
 		return (
-		<>
-		<div className={style.content}>
+			<>
+				<div className={style.content}>
 					<div className={style.content__header}>
 						<div className={style.content__header_title}>
 							<span>Пробег</span>
@@ -79,17 +99,22 @@ const createSparesContent = () => {
 						</div>
 					</div>
 					<div className={style.content__info}>
-						{dataUser.length > 0 ? (dataUser.map(item => (
-							<div className={style.content__info_item} key={item._id}>
-							<span>{item.mileage}</span>	<span>{item.title}</span> <span>{item.price} р</span>
-							</div>
-						))) :  <div> Пока пусто</div>}
+						{dataUser.length > 0 ? (
+							dataUser.map(item => (
+								<div className={style.content__info_item} key={item._id}>
+									<span>{item.mileage}</span> <span>{item.title}</span>{' '}
+									<span>{item.price} р</span>
+								</div>
+							))
+						) : (
+							<div> Пока пусто</div>
+						)}
 					</div>
 					<div className={style.content__icon}>
 						<GiMechanicGarage size={300} />
 					</div>
 				</div>
-		</>
+			</>
 		)
 	}
 

@@ -147,6 +147,8 @@ const createGasolineContent = () => {
 							required: true,
 						})}
 						type='date'
+                       
+                        placeholder='Выбрать день'
 					/>
 					{errors?.date?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
