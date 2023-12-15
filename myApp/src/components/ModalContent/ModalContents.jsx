@@ -80,7 +80,7 @@ const createAccessoriesContent = () => {
 						<FaShopify size={150} />
 					</div>
 					<div className={style.button}>
-						<button className={style.button_btn} type='submit'>
+						<button className='button' type='submit'>
 							Добавить
 						</button>
 					</div>
@@ -168,7 +168,7 @@ const createGasolineContent = () => {
 						<PiGasCanFill size={150} />
 					</div>
 					<div className={style.button}>
-						<button className={style.button_btn} type='submit'>
+						<button className='button' type='submit'>
 							Добавить
 						</button>
 					</div>
@@ -275,7 +275,7 @@ const createSparesContent = () => {
 						<GiMechanicGarage size={150} />
 					</div>
 					<div className={style.button}>
-						<button className={style.button_btn} type='submit'>
+						<button className='button' type='submit'>
 							Добавить
 						</button>
 					</div>

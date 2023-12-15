@@ -180,7 +180,7 @@ const UserData = () => {
                         buttonMore={<CiCircleMore size={30} />}
 					/>
 				</div>
-				<button onClick={logOut}>Выйти</button>
+				<button className='button' onClick={logOut}>Выйти</button>
 			</div>
 			{selectedCardType && (
 				<Modal

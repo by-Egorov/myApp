@@ -219,14 +219,14 @@ const Register = () => {
                         </>}
                     <div className={style.start__button}>
                         <button
-                            className={style.start__button_btn}
+                            className='button'
                             type='submit'
                             disabled={location.pathname === '/register' && !selectedMileage}
                         >
                             {location.pathname === '/register' ? 'Начать' : 'Войти'}
                         </button>
                     </div>
-                    {location.pathname === '/register' ? <Link to='/login'>Login</Link> : <Link to='/register'>Register</Link>}
+                    {location.pathname === '/register' ? <Link to='/login'><button className='button'>Login</button></Link> : <Link to='/register'><button className='button'>Register</button></Link>}
                 </form>
             </div>
         </div>
