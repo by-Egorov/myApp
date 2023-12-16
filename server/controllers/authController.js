@@ -32,9 +32,11 @@ export const register = async (req, res) => {
 			carYear: req.body.carYear,
 		})
 		const user = await doc.save()
+		const token = generateAccessToken(user._id)
 		const { passwordHash, ...userData } = user._doc
 		res.json({
 			...userData,
+			token,
 		})
 	} catch (e) {
 		console.log(e)

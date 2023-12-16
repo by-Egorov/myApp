@@ -10,6 +10,7 @@ const App = () => {
 		const fetchData = async() => {
 			try {
 				const {data} = await $authHost.get('/user/me')
+				console.log(data)
 				localStorage.setItem('user', JSON.stringify(data))
 			} catch (error) {
 				console.log(error)
