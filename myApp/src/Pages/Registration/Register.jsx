@@ -62,11 +62,10 @@ const Register = () => {
                 carYear: '',
                 carMileage: '',
             })
-            console.log(response.data)
             localStorage.setItem('user', JSON.stringify(response.data))
             localStorage.setItem('token', JSON.stringify(response.data.token))
-            // navigate('/')
-            // window.location.reload()
+            navigate('/')
+            window.location.reload()
         } catch (e) {
             alert(e)
         }

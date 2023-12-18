@@ -9,7 +9,7 @@ import { $authHost } from '../../axios.js'
 
 const createAccessoriesContent = () => {
 	const AccessoriesContent = () => {
-        const dispatch = useDispatch()
+		const dispatch = useDispatch()
 		const {
 			register,
 			handleSubmit,
@@ -147,8 +147,7 @@ const createGasolineContent = () => {
 							required: true,
 						})}
 						type='date'
-                       
-                        placeholder='Выбрать день'
+						placeholder='Выбрать день'
 					/>
 					{errors?.date?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
@@ -188,20 +187,20 @@ const createSparesContent = () => {
 			reset,
 			formState: { errors },
 		} = useForm()
-        const addDataUser = async (arrayType, mileage, title, price) => {
-            try {
-              const response = await $authHost.patch('/user/update-data', {
-                arrayType,
-                mileage,
-                title,
-                price
-              });
-          
-              console.log(response.data);
-            } catch (error) {
-              console.error('Ошибка при добавлении данных на сервер:', error);
-            }
-          }
+		const addDataUser = async (arrayType, mileage, title, price) => {
+			try {
+				const response = await $authHost.patch('/user/update-data', {
+					arrayType,
+					mileage,
+					title,
+					price,
+				})
+
+				console.log(response.data)
+			} catch (error) {
+				console.error('Ошибка при добавлении данных на сервер:', error)
+			}
+		}
 
 		const addGas = async data => {
 			const selectedType = 'spares'
@@ -210,7 +209,7 @@ const createSparesContent = () => {
 			const selectedPrice = data.price
 			try {
 				addDataUser(selectedType, selectedMileage, selectedTitle, selectedPrice)
-                
+
 				dispatch({
 					type: 'ADD_SPARES',
 					payload: {
@@ -225,13 +224,12 @@ const createSparesContent = () => {
 					price: '',
 				}
 
-                const updateUser = await $authHost.patch('/user/update', {
-                        carMileage: selectedMileage
-                })
-                confirm.log(updateUser)
-                // localStorage.setItem('mileage', JSON.stringify(selectedMileage))
+				const updateUser = await $authHost.patch('/user/update', {
+					carMileage: selectedMileage,
+				})
+				confirm.log(updateUser)
+				// localStorage.setItem('mileage', JSON.stringify(selectedMileage))
 				reset(emptyFormData)
-
 			} catch (e) {
 				console.warn(e)
 			}

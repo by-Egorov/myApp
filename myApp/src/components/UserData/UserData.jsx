@@ -3,19 +3,18 @@ import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 //Style
 import style from '../../components/UserData/UserData.module.scss'
 //Utils
-import {
-	handleResetImage,
-	handleShowAddImage,
-} from '../../utils/Handlers/handlers.js'
+import { handleShowAddImage } from '../../utils/Handlers/handlers.js'
 //React-icons
 import { IoIosAddCircleOutline, IoMdSpeedometer } from 'react-icons/io'
 import { GiMechanicGarage } from 'react-icons/gi'
 import { FaShopify } from 'react-icons/fa'
 import { PiGasCanFill } from 'react-icons/pi'
-import { CiCircleMore } from 'react-icons/ci'
+import { CiCircleMore, CiImageOn } from 'react-icons/ci'
+import { AiOutlineReload, AiOutlineSend } from 'react-icons/ai'
 //Icons
 import preloadCar from '../../assets/preloadCar.svg'
 //Components
@@ -23,18 +22,18 @@ import Card from '../Card/Card.jsx'
 import Modal from '../AddInfo/Modal.jsx'
 import ModalContents from '../ModalContent/ModalContents.jsx'
 import CardContents from '../CardContent/CardContents.jsx'
+import { $authHost } from '../../axios.js'
 
 const UserData = () => {
-	const { register, handleSubmit } = useForm()
-
+	const { register, handleSubmit, reset } = useForm()
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const user = useSelector(state => state.user.user)
 	const [addImage, setAddImage] = useState(false)
 	const [selectedCardType, setSelectedCardType] = useState(null)
 	const [selectedCardOpenType, setSelectedCardOpenType] = useState(null)
-	const [userCarImage, setUserCarImage] = useState(
-		JSON.parse(localStorage.getItem('userCarImage')) || null
-	)
+	const [defaultCarImage, setDefaultCarImage] = useState(null)
+
 	const handleCardClick = cardType => {
 		setSelectedCardType(cardType)
 	}
@@ -47,10 +46,25 @@ const UserData = () => {
 	const handleModalClose = () => {
 		setSelectedCardType(null)
 	}
-	const handleAddImage = data => {
-		console.log(data.image)
-		setUserCarImage(data.image)
-		localStorage.setItem('userCarImage', JSON.stringify(data.image))
+	const handleAddImage = async data => {
+		setDefaultCarImage(null)
+		handleShowAddImage(setAddImage, addImage)
+		reset({
+			image: '',
+		})
+		dispatch({
+			type: 'ADD_CAR_IMAGE',
+			payload: {
+				carImage: data.image,
+			},
+		})
+		await $authHost.patch('/user/update', {
+			carImage: data.image,
+		})
+	}
+	const handleRemoveImage = async () => {
+		setDefaultCarImage(preloadCar)
+		handleShowAddImage(setAddImage, addImage)
 	}
 	const logOut = async () => {
 		localStorage.removeItem('user')
@@ -73,17 +87,33 @@ const UserData = () => {
 					</ul>
 				</div>
 				<div className={style.home__image}>
-					{userCarImage ? (
-						<div
-							className={style.home__image_preload}
-							onClick={() => handleShowAddImage(setAddImage)}
-						>
-							<img src={userCarImage} alt='userCarImage' />
-							<button onClick={() => handleResetImage(setUserCarImage)}>
-								сбросить
-							</button>
+					<div className={style.home__image_preload}>
+						<img
+							src={defaultCarImage ? defaultCarImage : user.carImage}
+							alt='userCarImage'
+						/>
+						<div className={style.home__image_preload_reload}>
+							{!addImage && (
+								<>
+									<CiImageOn
+										size={20}
+										onClick={() => handleShowAddImage(setAddImage, addImage)}
+									/>
+								</>
+							)}
+							{addImage ? (
+								<form>
+									<input {...register('image')} />
+									<AiOutlineSend
+										size={20}
+										onClick={handleSubmit(handleAddImage)}
+									/>
+									<AiOutlineReload size={20} onClick={handleRemoveImage} />
+								</form>
+							) : null}
 						</div>
-					) : (
+					</div>
+					{/* ) : (
 						<div className={style.home__image_preload}>
 							<div className={style.home__image_preload_img}>
 								<img src={preloadCar} alt='preload' />
@@ -104,7 +134,7 @@ const UserData = () => {
 								)}
 							</div>
 						</div>
-					)}
+					)} */}
 				</div>
 				<div className={style.home__cards}>
 					<Card
@@ -114,13 +144,13 @@ const UserData = () => {
 							<>
 								<div className={style.card__body_title}>Сумма:</div>
 								<div className={style.card__body_sum}>
-                                {user.spares &&
+									{user.spares &&
 										Array.from(user.spares).reduce(
 											(acc, rec) => acc + rec.price,
 											0
 										)}
-                                        р.
-                                </div>
+									р.
+								</div>
 							</>
 						}
 						handleClick={() => handleCardClick('spares')}
@@ -147,7 +177,7 @@ const UserData = () => {
 						handleCardOpen={() => handleCardOpen('gasolineCard')}
 						handleClick={() => handleCardClick('gasoline')}
 						buttonAdd={<IoIosAddCircleOutline size={30} />}
-                        buttonMore={<CiCircleMore size={30} />}
+						buttonMore={<CiCircleMore size={30} />}
 					/>
 					<Card
 						title='Пробег'
@@ -165,22 +195,24 @@ const UserData = () => {
 							<>
 								<div className={style.card__body_title}>Сумма:</div>
 								<div className={style.card__body_sum}>
-                                {user.accessories &&
+									{user.accessories &&
 										Array.from(user.accessories).reduce(
 											(acc, rec) => acc + rec.price,
 											0
 										)}
-                                        р.
-                                </div>
+									р.
+								</div>
 							</>
 						}
 						handleCardOpen={() => handleCardOpen('accessoriesCard')}
 						handleClick={() => handleCardClick('accessories')}
 						buttonAdd={<IoIosAddCircleOutline size={30} />}
-                        buttonMore={<CiCircleMore size={30} />}
+						buttonMore={<CiCircleMore size={30} />}
 					/>
 				</div>
-				<button className='button' onClick={logOut}>Выйти</button>
+				<button className='button' onClick={logOut}>
+					Выйти
+				</button>
 			</div>
 			{selectedCardType && (
 				<Modal
