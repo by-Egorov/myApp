@@ -9,25 +9,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      // Функция для открытия полноэкранного режима
-      function launchFullscreen(element) {
-          if (element.requestFullscreen) {
-              element.requestFullscreen();
-          } else if (element.mozRequestFullScreen) {
-              element.mozRequestFullScreen();
-          } else if (element.webkitRequestFullscreen) {
-              element.webkitRequestFullscreen();
-          } else if (element.msRequestFullscreen) {
-              element.msRequestFullscreen();
-          }
-      }
-
-      // Запуск полноэкранного режима при загрузке страницы
-      window.onload = function() {
-          var body = document.body;
-          launchFullscreen(body);
-      };
-  </script>
   </body>
 </html>

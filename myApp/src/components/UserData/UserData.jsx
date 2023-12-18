@@ -2,7 +2,7 @@
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 //Style
 import style from '../../components/UserData/UserData.module.scss'
@@ -72,8 +72,41 @@ const UserData = () => {
 		navigate('/login')
 	}
 
+
+	useEffect(() => {
+    const launchFullscreen = (element) => {
+      if (element.requestFullscreen) {
+        element.requestFullscreen().catch((err) => {
+          console.error('Failed to enter fullscreen mode:', err.message);
+        });
+      } else if (element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    };
+
+    // Получаем ссылку на кнопку
+    const button = document.getElementById('fullscreenButton');
+
+    // Вызываем функцию открытия полноэкранного режима по событию клика на кнопке
+    const handleClick = () => {
+      launchFullscreen(document.body);
+    };
+
+    // Добавляем слушатель события клика на кнопке
+    button.addEventListener('click', handleClick);
+
+    // Очищаем слушатель события при размонтировании компонента
+    return () => {
+      button.removeEventListener('click', handleClick);
+    };
+  }, [])
 	return (
 		<>
+		<button id="fullscreenButton">Go Fullscreen</button>
 			<div
 				className={
 					selectedCardType ? `${style.home} ${style.opacity}` : `${style.home}`
