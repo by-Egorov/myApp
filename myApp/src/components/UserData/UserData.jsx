@@ -71,42 +71,8 @@ const UserData = () => {
 		localStorage.removeItem('token')
 		navigate('/login')
 	}
-
-
-	useEffect(() => {
-    const launchFullscreen = (element) => {
-      if (element.requestFullscreen) {
-        element.requestFullscreen().catch((err) => {
-          console.error('Failed to enter fullscreen mode:', err.message);
-        });
-      } else if (element.mozRequestFullScreen) {
-        element.mozRequestFullScreen();
-      } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-      } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-      }
-    };
-
-    // Получаем ссылку на кнопку
-    const button = document.getElementById('fullscreenButton');
-
-    // Вызываем функцию открытия полноэкранного режима по событию клика на кнопке
-    const handleClick = () => {
-      launchFullscreen(document.body);
-    };
-
-    // Добавляем слушатель события клика на кнопке
-    button.addEventListener('click', handleClick);
-
-    // Очищаем слушатель события при размонтировании компонента
-    return () => {
-      button.removeEventListener('click', handleClick);
-    };
-  }, [])
 	return (
 		<>
-		<button id="fullscreenButton">Go Fullscreen</button>
 			<div
 				className={
 					selectedCardType ? `${style.home} ${style.opacity}` : `${style.home}`
