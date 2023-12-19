@@ -5,11 +5,10 @@ import Home from './Pages/Home/Home'
 import { $authHost } from './axios.js'
 
 const App = () => {
-
 	useEffect(() => {
-		const fetchData = async() => {
+		const fetchData = async () => {
 			try {
-				const {data} = await $authHost.get('/user/me')
+				const { data } = await $authHost.get('/user/me')
 				console.log(data)
 				localStorage.setItem('user', JSON.stringify(data))
 			} catch (error) {
@@ -20,13 +19,15 @@ const App = () => {
 	}, [])
 
 	return (
-		<Router>
-			<Routes>
-				<Route path='/' element={<Home />} />
-				<Route path='/register' element={<Register />} />
-				<Route path='/login' element={<Register />} />
-			</Routes>
-		</Router>
+		<>
+			<Router>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/register' element={<Register />} />
+					<Route path='/login' element={<Register />} />
+				</Routes>
+			</Router>
+		</>
 	)
 }
 

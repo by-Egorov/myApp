@@ -7,6 +7,7 @@
 	justify-content: space-around;
 	height: 100vh;
 	padding: 20px 0;
+
 	&__title {
 		width: 200px;
 		font-size: 18px;
@@ -76,4 +77,8 @@
 }
 .err {
 	color: red;
+}
+.loading {
+position: absolute;
+bottom: 0;right: 0;
 }

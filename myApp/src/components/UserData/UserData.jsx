@@ -23,6 +23,7 @@ import Modal from '../AddInfo/Modal.jsx'
 import ModalContents from '../ModalContent/ModalContents.jsx'
 import CardContents from '../CardContent/CardContents.jsx'
 import { $authHost } from '../../axios.js'
+import Example from '../Loading/Example.jsx'
 
 const UserData = () => {
 	const { register, handleSubmit, reset } = useForm()
@@ -32,7 +33,6 @@ const UserData = () => {
 	const [addImage, setAddImage] = useState(false)
 	const [selectedCardType, setSelectedCardType] = useState(null)
 	const [selectedCardOpenType, setSelectedCardOpenType] = useState(null)
-	const [defaultCarImage, setDefaultCarImage] = useState(null)
 
 	const handleCardClick = cardType => {
 		setSelectedCardType(cardType)
@@ -47,24 +47,44 @@ const UserData = () => {
 		setSelectedCardType(null)
 	}
 	const handleAddImage = async data => {
-		setDefaultCarImage(null)
-		handleShowAddImage(setAddImage, addImage)
-		reset({
-			image: '',
-		})
-		dispatch({
-			type: 'ADD_CAR_IMAGE',
-			payload: {
+		try {
+			handleShowAddImage(setAddImage, addImage)
+			reset({
+				image: '',
+			})
+			dispatch({
+				type: 'ADD_CAR_IMAGE',
+				payload: {
+					carImage: data.image,
+				},
+			})
+			await $authHost.patch('/user/update', {
 				carImage: data.image,
-			},
-		})
-		await $authHost.patch('/user/update', {
-			carImage: data.image,
-		})
+			})
+		} catch (error) {
+			console.log(error)
+		}
 	}
 	const handleRemoveImage = async () => {
-		setDefaultCarImage(preloadCar)
-		handleShowAddImage(setAddImage, addImage)
+		try {
+			handleShowAddImage(setAddImage, addImage)
+			reset({
+				image: '',
+			})
+			dispatch({
+				type: 'ADD_CAR_IMAGE',
+				payload: {
+					carImage: null,
+				},
+			})
+			await $authHost.patch('/user/update', {
+				carImage: null,
+			})
+			window.location.reload()
+		} catch (error) {
+			console.log(error)
+		}
+		console.log('ok')
 	}
 	const logOut = async () => {
 		localStorage.removeItem('user')
@@ -87,10 +107,11 @@ const UserData = () => {
 				</div>
 				<div className={style.home__image}>
 					<div className={style.home__image_preload}>
-						<img
-							src={defaultCarImage ? defaultCarImage : user.carImage}
-							alt='userCarImage'
-						/>
+						{user.carImage ? (
+							<img src={user.carImage} alt='userCarImage' />
+						) : (
+							<img src={preloadCar} alt='userCarImage' />
+						)}
 						<div className={style.home__image_preload_reload}>
 							{!addImage && (
 								<>
@@ -112,28 +133,6 @@ const UserData = () => {
 							) : null}
 						</div>
 					</div>
-					{/* ) : (
-						<div className={style.home__image_preload}>
-							<div className={style.home__image_preload_img}>
-								<img src={preloadCar} alt='preload' />
-							</div>
-							<div className={style.home__image_preload_add}>
-								<IoIosAddCircleOutline
-									size={50}
-									color={'#c5c5c5'}
-									onClick={() => handleShowAddImage(setAddImage, addImage)}
-								/>
-								{addImage && (
-									<div>
-										<form onSubmit={handleSubmit(handleAddImage)}>
-											<input {...register('image')} />
-											<button type='submit'>отправить</button>
-										</form>
-									</div>
-								)}
-							</div>
-						</div>
-					)} */}
 				</div>
 				<div className={style.home__cards}>
 					<Card
