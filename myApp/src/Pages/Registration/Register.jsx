@@ -124,7 +124,7 @@ const Register = () => {
 							pattern:
 								/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
 						})}
-						placeholder='email'
+						placeholder='почта'
 					/>
 					{errors?.email?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
@@ -140,7 +140,7 @@ const Register = () => {
 							maxLength: 8,
 						})}
 						type='password'
-						placeholder='password'
+						placeholder='пароль'
 					/>
 					{errors?.password?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
@@ -248,11 +248,11 @@ const Register = () => {
 							</div>
 							{location.pathname === '/register' ? (
 								<Link to='/login'>
-									<button className='button'>Login</button>
+									<button className='button'>Войти</button>
 								</Link>
 							) : (
 								<Link to='/register'>
-									<button className='button'>Register</button>
+									<button className='button'>Добавить машину</button>
 								</Link>
 							)}
 						</>
