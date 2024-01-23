@@ -1,8 +1,9 @@
 import style from './CardContents.module.scss'
 import { useSelector } from 'react-redux'
-import { GiMechanicGarage } from 'react-icons/gi'
-import { FaShopify } from 'react-icons/fa'
-import { PiGasCanFill } from 'react-icons/pi'
+// Images
+import spares from '../../assets/spares.png'
+import gas from '../../assets/gas.png'
+import accessories from '../../assets/accessories.png'
 
 const createAccessoriesContent = () => {
 	const AccessoriesContent = () => {
@@ -29,7 +30,7 @@ const createAccessoriesContent = () => {
 						)}
 					</div>
 					<div className={style.content__icon}>
-						<FaShopify size={300} />
+						<img src={accessories} alt="accessories" />
 					</div>
 				</div>
 			</>
@@ -75,7 +76,7 @@ const createGasolineContent = () => {
 						)}
 					</div>
 					<div className={style.content__icon}>
-						<PiGasCanFill size={300} />
+					<img src={gas} alt="gas" />
 					</div>
 				</div>
 			</>
@@ -111,7 +112,7 @@ const createSparesContent = () => {
 						)}
 					</div>
 					<div className={style.content__icon}>
-						<GiMechanicGarage size={300} />
+					<img src={spares} alt="spares" />
 					</div>
 				</div>
 			</>

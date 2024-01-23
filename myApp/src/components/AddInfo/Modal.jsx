@@ -1,7 +1,7 @@
 import style from './Modal.module.scss'
 import { IoIosArrowDown } from 'react-icons/io'
 import { useSpring, animated } from 'react-spring'
-
+import arrowDown from '../../assets/arrow-down.png'
 const Modal = ({ cardContent, onClick }) => {
 	const animation = useSpring({
 		opacity: 1,
@@ -10,7 +10,7 @@ const Modal = ({ cardContent, onClick }) => {
 	})
 	return (
 		<animated.div style={animation} className={style.modal}>
-			<div className={style.modal__close}><IoIosArrowDown size={30} onClick={onClick} /></div>
+			<div className={style.modal__close}  onClick={onClick}><img src={arrowDown} alt="arrowDown" /></div>
 
 			<div className={style.modal__content}>
 				{cardContent}

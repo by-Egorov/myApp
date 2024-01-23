@@ -16,6 +16,10 @@
 	}
 	&__image {
 		width: 400px;
+		&_edit {
+			width: 20px;
+			height: 20px;
+		}
 		&_preload {
 			display: flex;
 			flex-direction: column-reverse;
@@ -60,8 +64,13 @@
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
-		gap: 15px;
+		gap: 5px;
 	}
+}
+.form_icons {
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
 }
 .opacity {
 	background: #c5c5c5;

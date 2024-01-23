@@ -2,28 +2,30 @@
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 //Style
 import style from '../../components/UserData/UserData.module.scss'
 //Utils
 import { handleShowAddImage } from '../../utils/Handlers/handlers.js'
 //React-icons
-import { IoIosAddCircleOutline, IoMdSpeedometer } from 'react-icons/io'
-import { GiMechanicGarage } from 'react-icons/gi'
-import { FaShopify } from 'react-icons/fa'
-import { PiGasCanFill } from 'react-icons/pi'
-import { CiCircleMore, CiImageOn } from 'react-icons/ci'
-import { AiOutlineReload, AiOutlineSend } from 'react-icons/ai'
-//Icons
-import preloadCar from '../../assets/preloadCar.svg'
 //Components
 import Card from '../Card/Card.jsx'
 import Modal from '../AddInfo/Modal.jsx'
 import ModalContents from '../ModalContent/ModalContents.jsx'
 import CardContents from '../CardContent/CardContents.jsx'
 import { $authHost } from '../../axios.js'
-import Example from '../Loading/Example.jsx'
+// Images
+import preloadCar from '../../assets/preloadCar.svg'
+import spares from '../../assets/spares.png'
+import gas from '../../assets/gas.png'
+import accessories from '../../assets/accessories.png'
+import mileage from '../../assets/mileage.png'
+import addIcon from '../../assets/add-icon.png'
+import moreIcon from '../../assets/more-icon.png'
+import editImage from '../../assets/edit-image.png'
+import reload from '../../assets/reload.png'
+import send from '../../assets/send.png'
 
 const UserData = () => {
 	const { register, handleSubmit, reset } = useForm()
@@ -114,21 +116,28 @@ const UserData = () => {
 						)}
 						<div className={style.home__image_preload_reload}>
 							{!addImage && (
-								<>
-									<CiImageOn
-										size={20}
+								<div className={style.home__image_edit}>
+									<img
+										src={editImage}
+										alt='edit-image'
 										onClick={() => handleShowAddImage(setAddImage, addImage)}
 									/>
-								</>
+								</div>
 							)}
 							{addImage ? (
 								<form>
 									<input {...register('image')} />
-									<AiOutlineSend
-										size={20}
+									<div
+										className={style.form_icons}
 										onClick={handleSubmit(handleAddImage)}
-									/>
-									<AiOutlineReload size={20} onClick={handleRemoveImage} />
+									>
+										{' '}
+										<img src={send} alt='send' />
+									</div>
+									<div className={style.form_icons} onClick={handleRemoveImage}>
+										{' '}
+										<img src={reload} alt='reload' />
+									</div>
 								</form>
 							) : null}
 						</div>
@@ -137,7 +146,7 @@ const UserData = () => {
 				<div className={style.home__cards}>
 					<Card
 						title='Запчасти'
-						icon={<GiMechanicGarage size={50} />}
+						image={spares}
 						bodyContent={
 							<>
 								<div className={style.card__body_title}>Сумма:</div>
@@ -153,12 +162,12 @@ const UserData = () => {
 						}
 						handleClick={() => handleCardClick('spares')}
 						handleCardOpen={() => handleCardOpen('sparesCard')}
-						buttonAdd={<IoIosAddCircleOutline size={30} />}
-						buttonMore={<CiCircleMore size={30} />}
+						buttonAdd={addIcon}
+						buttonMore={moreIcon}
 					/>
 					<Card
 						title='Бензин'
-						icon={<PiGasCanFill size={50} />}
+						image={gas}
 						bodyContent={
 							<>
 								<div className={style.card__body_title}>Сумма:</div>
@@ -174,21 +183,22 @@ const UserData = () => {
 						}
 						handleCardOpen={() => handleCardOpen('gasolineCard')}
 						handleClick={() => handleCardClick('gasoline')}
-						buttonAdd={<IoIosAddCircleOutline size={30} />}
-						buttonMore={<CiCircleMore size={30} />}
+						buttonAdd={addIcon}
+						buttonMore={moreIcon}
 					/>
 					<Card
 						title='Пробег'
-						icon={<IoMdSpeedometer size={50} />}
+						image={mileage}
 						bodyContent={
 							<>
 								<span> {user.carMileage} км </span>
 							</>
 						}
+						showButton={false}
 					/>
 					<Card
 						title='Аксессуары'
-						icon={<FaShopify size={50} />}
+						image={accessories}
 						bodyContent={
 							<>
 								<div className={style.card__body_title}>Сумма:</div>
@@ -204,8 +214,8 @@ const UserData = () => {
 						}
 						handleCardOpen={() => handleCardOpen('accessoriesCard')}
 						handleClick={() => handleCardClick('accessories')}
-						buttonAdd={<IoIosAddCircleOutline size={30} />}
-						buttonMore={<CiCircleMore size={30} />}
+						buttonAdd={addIcon}
+						buttonMore={moreIcon}
 					/>
 				</div>
 				<button className='button' onClick={logOut}>

@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
-import { GiMechanicGarage } from 'react-icons/gi'
-import { FaShopify } from 'react-icons/fa'
-import { PiGasCanFill } from 'react-icons/pi'
+// Images
+import spares from '../../assets/spares.png'
+import gas from '../../assets/gas.png'
+import accessories from '../../assets/accessories.png'
 
 import style from './ModalContents.module.scss'
 import { $authHost } from '../../axios.js'
@@ -77,7 +79,7 @@ const createAccessoriesContent = () => {
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<div className={style.icon}>
-						<FaShopify size={150} />
+						<img src={accessories} alt="accessories" />
 					</div>
 					<div className={style.button}>
 						<button className='button' type='submit'>
@@ -93,6 +95,7 @@ const createAccessoriesContent = () => {
 }
 const createGasolineContent = () => {
 	const GasolineContent = () => {
+		const [currentDate, setCurrentDate] = useState(getFormattedDate())
 		const dispatch = useDispatch()
 		const {
 			register,
@@ -138,6 +141,18 @@ const createGasolineContent = () => {
 			}
 		}
 
+		function getFormattedDate() {
+			const date = new Date()
+			const year = date.getFullYear()
+			const month = String(date.getMonth() + 1).padStart(2, '0')
+			const day = String(date.getDate()).padStart(2, '0')
+			return `${year}-${month}-${day}`
+		}
+
+		useEffect(() => {
+			setCurrentDate(getFormattedDate())
+		}, [])
+
 		return (
 			<>
 				<form className={style.form} onSubmit={handleSubmit(addGas)}>
@@ -146,8 +161,10 @@ const createGasolineContent = () => {
 						{...register('date', {
 							required: true,
 						})}
+						value={currentDate}
 						type='date'
 						placeholder='Выбрать день'
+						onChange={e => setCurrentDate(e.target.value)}
 					/>
 					{errors?.date?.type === 'required' && (
 						<p className={style.err}>Это поле не может быть пустым</p>
@@ -164,7 +181,7 @@ const createGasolineContent = () => {
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<div className={style.icon}>
-						<PiGasCanFill size={150} />
+					<img src={gas} alt="gas" />
 					</div>
 					<div className={style.button}>
 						<button className='button' type='submit'>
@@ -189,20 +206,18 @@ const createSparesContent = () => {
 		} = useForm()
 		const addDataUser = async (arrayType, mileage, title, price) => {
 			try {
-				const response = await $authHost.patch('/user/update-data', {
+				await $authHost.patch('/user/update-data', {
 					arrayType,
 					mileage,
 					title,
 					price,
 				})
-
-				console.log(response.data)
 			} catch (error) {
 				console.error('Ошибка при добавлении данных на сервер:', error)
 			}
 		}
 
-		const addGas = async data => {
+		const addSpares = async data => {
 			const selectedType = 'spares'
 			const selectedMileage = Number(data.mileage)
 			const selectedTitle = data.title
@@ -225,10 +240,10 @@ const createSparesContent = () => {
 				}
 
 				const updateUser = await $authHost.patch('/user/update', {
-					carMileage: selectedMileage,
+					carMileage: data.mileage,
 				})
-				confirm.log(updateUser)
-				// localStorage.setItem('mileage', JSON.stringify(selectedMileage))
+				console.log(updateUser)
+				localStorage.setItem('mileage', JSON.stringify(selectedMileage))
 				reset(emptyFormData)
 			} catch (e) {
 				console.warn(e)
@@ -236,7 +251,7 @@ const createSparesContent = () => {
 		}
 		return (
 			<>
-				<form className={style.form} onSubmit={handleSubmit(addGas)}>
+				<form className={style.form} onSubmit={handleSubmit(addSpares)}>
 					<input
 						className={style.input}
 						{...register('mileage', {
@@ -270,7 +285,7 @@ const createSparesContent = () => {
 						<p className={style.err}>Это поле не может быть пустым</p>
 					)}
 					<div className={style.icon}>
-						<GiMechanicGarage size={150} />
+					<img src={spares} alt="spares" />
 					</div>
 					<div className={style.button}>
 						<button className='button' type='submit'>
