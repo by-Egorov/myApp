@@ -100,14 +100,6 @@ const Register = () => {
 	return (
 		<>
 			<div className={style.start}>
-				<div className={style.start__header}>
-					<div className={style.start__title}>
-						Добро пожаловать в приложение myCar !
-					</div>
-					<div className={style.start__title}>
-						Введите данные своей машины, и ведите учет расходов
-					</div>
-				</div>
 
 				<form
 					className={style.start__form}

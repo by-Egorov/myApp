@@ -23,15 +23,17 @@
 			justify-content: space-around;
 		}
 		&_null {
-			margin-top: 50%;
 			align-self: center;
 		}
 	}
 
 	&__icon {
-		position: absolute;
-		top: 25%;
-		left: 15%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		// position: absolute;
+		// top: 25%;
+		// left: 15%;
 		z-index: 0;
 		opacity: 0.1;
 		& img {
