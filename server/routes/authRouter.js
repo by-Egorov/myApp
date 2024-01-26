@@ -5,7 +5,8 @@ import {
     register,
     getUser,
     updateUserData,
-    updateUser
+    updateUser,
+    sendMail
 } from '../controllers/authController.js'
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -32,6 +33,7 @@ router.post(
     ],
     login
 )
+router.post('/send-email', sendMail)
 router.get('/user/me',authMiddleware, getUser)
 router.patch('/user/update-data', authMiddleware, updateUserData)
 router.patch('/user/update', authMiddleware, updateUser)

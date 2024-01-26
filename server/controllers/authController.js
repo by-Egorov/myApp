@@ -2,7 +2,25 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { validationResult } from 'express-validator'
 import User from '../models/User.js'
+import nodemailer from 'nodemailer'
 
+const email = process.env.EMAIL
+const pass = process.env.PASS
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.yandex.ru',
+  port: 587,
+  secure: false,
+  auth: {
+    user: email,
+    pass: pass
+  }
+})
+
+//Random number
+const getRandomNumber = (min, max) => {
+	return Math.round(Math.random() * (max - min) + min)
+}
 //Generate jwt token
 const generateAccessToken = id => {
 	const payload = {
@@ -133,11 +151,30 @@ export const updateUser = async (req, res) => {
 	const update = req.body
 	try {
 		const user = await User.findByIdAndUpdate(userId, update, {
-			new: true 
+			new: true,
 		})
 		console.log(update)
 		console.log(user)
 	} catch (error) {
 		console.log(error)
+	}
+}
+//send-email
+export const sendMail = async (req, res) => {
+	const randomNumber = getRandomNumber(1000, 9999)
+	try {
+		await transporter.sendMail({
+			from: process.env.EMAIL, // Адрес отправителя
+			to: req.body.email, // Адрес получателя
+			subject: `Приветствую`,
+			html: `
+			<p>Вы пытаетесь авторизоваться в приложении myCar!</p>
+			<p>Ваш код подтверждения: ${randomNumber}</p>`,
+		})
+
+		res.status(200).json({ message: 'Email sent successfully' })
+	} catch (error) {
+		console.error(error)
+		res.status(500).send(error.message)
 	}
 }

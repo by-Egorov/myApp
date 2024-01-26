@@ -3,14 +3,14 @@ import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import authRouter from './routes/authRouter.js'
-import authMiddleware from "./middleware/authMiddleware.js";
-
+import authMiddleware from './middleware/authMiddleware.js'
 
 const PORT = process.env.PORT || 5555
 const db = process.env.DB_NAME
 const user = process.env.DB_USER_NAME
 const password = process.env.DB_PASSWORD
 const app = express()
+
 
 mongoose
 	.connect(
