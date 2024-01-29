@@ -4,23 +4,25 @@ import { validationResult } from 'express-validator'
 import User from '../models/User.js'
 import nodemailer from 'nodemailer'
 
+//Random number
+const getRandomNumber = (min, max) => {
+	return Math.round(Math.random() * (max - min) + min)
+}
+
+
 const user = process.env.EMAIL_USER
 const pass = process.env.EMAIL_PASS
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
+	port: 465,
+	secure: true,
   auth: {
     user: user,
     pass: pass
   }
 })
 
-//Random number
-const getRandomNumber = (min, max) => {
-	return Math.round(Math.random() * (max - min) + min)
-}
 //Generate jwt token
 const generateAccessToken = id => {
 	const payload = {
@@ -178,3 +180,4 @@ export const sendMail = async (req, res) => {
 		res.status(500).send(error.message)
 	}
 }
+
