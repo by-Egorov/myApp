@@ -8,9 +8,9 @@ const user = process.env.EMAIL_USER
 const pass = process.env.EMAIL_PASS
 
 const transporter = nodemailer.createTransport({
-  host: 'gmail',
-  // port: 587,
-  // secure: false,
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
   auth: {
     user: user,
     pass: pass
