@@ -4,15 +4,15 @@ import { validationResult } from 'express-validator'
 import User from '../models/User.js'
 import nodemailer from 'nodemailer'
 
-const email = process.env.EMAIL
-const pass = process.env.PASS
+const user = process.env.EMAIL_USER
+const pass = process.env.EMAIL_PASS
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.yandex.ru',
-  port: 587,
-  secure: false,
+  host: 'gmail',
+  // port: 587,
+  // secure: false,
   auth: {
-    user: email,
+    user: user,
     pass: pass
   }
 })
