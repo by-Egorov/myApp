@@ -8,7 +8,7 @@
 
 		&_title {
 			display: flex;
-			justify-content: space-around;
+			justify-content: space-between;
 			border-bottom: 1px solid #000;
 			padding: 10px;
 			margin-bottom: 10px;
@@ -20,7 +20,9 @@
 		gap: 15px;
 		&_item {
 			display: flex;
-			justify-content: space-around;
+			justify-content: space-between;
+			padding: 0 10px;
+			gap: 15px;
 		}
 		&_null {
 			align-self: center;
@@ -31,9 +33,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		// position: absolute;
-		// top: 25%;
-		// left: 15%;
 		z-index: 0;
 		opacity: 0.1;
 		& img {
