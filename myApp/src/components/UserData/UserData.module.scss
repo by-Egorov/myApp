@@ -2,7 +2,23 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 10px;
+	&__button {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		font-family: 'Caveat', cursive;
+		font-size: 14px;
+		background: transparent;
+		border: none;
+		padding: 5px 10px;
+		color: #000;
+		align-self: end;
+
+		& img {
+			width: 24px;
+			height: 24px;
+		}
+	}
 	&__title {
 		text-align: center;
 		& ul {
@@ -16,7 +32,7 @@
 	}
 	&__image {
 		width: 300px;
-		
+
 		&_edit {
 			width: 20px;
 			height: 20px;
@@ -27,24 +43,24 @@
 			align-items: center;
 			position: relative;
 			&_reload {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
 				font-size: 10px;
-        & form {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          & input {
-            width: 70%;
-            height: 20px;
-            border-radius: 30px;
-            border: 1px solid #000;
-            padding: 10px;
-            color: #7b7a7a;
-          }
-        }
+				& form {
+					display: flex;
+					align-items: center;
+					gap: 10px;
+					& input {
+						width: 70%;
+						height: 20px;
+						border-radius: 30px;
+						border: 1px solid #000;
+						padding: 10px;
+						color: #7b7a7a;
+					}
+				}
 			}
 			&_add {
 				display: flex;

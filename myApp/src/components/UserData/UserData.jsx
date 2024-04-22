@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux'
 import style from '../../components/UserData/UserData.module.scss'
 //Utils
 import { handleShowAddImage } from '../../utils/Handlers/handlers.js'
-//React-icons
 //Components
 import Card from '../Card/Card.jsx'
 import Modal from '../AddInfo/Modal.jsx'
@@ -26,6 +25,7 @@ import moreIcon from '../../assets/more-icon.png'
 import editImage from '../../assets/edit-image.png'
 import reload from '../../assets/reload.png'
 import send from '../../assets/send.png'
+import logout from '../../assets/logout.png'
 
 const UserData = () => {
 	const { register, handleSubmit, reset } = useForm()
@@ -94,7 +94,6 @@ const UserData = () => {
 		navigate('/login')
 	}
 
-
 	return (
 		<>
 			<div
@@ -102,6 +101,9 @@ const UserData = () => {
 					selectedCardType ? `${style.home} ${style.opacity}` : `${style.home}`
 				}
 			>
+				<button className={style.home__button} onClick={logOut}>
+					<img src={logout} alt='logout' />
+				</button>
 				<div className={style.home__title}>
 					<ul>
 						<li>{user.carBrand}</li>
@@ -220,9 +222,9 @@ const UserData = () => {
 						buttonMore={moreIcon}
 					/>
 				</div>
-				<button className='button' onClick={logOut}>
+				{/* <button className='button' onClick={logOut}>
 					Выйти
-				</button>
+				</button> */}
 			</div>
 			{selectedCardType && (
 				<Modal

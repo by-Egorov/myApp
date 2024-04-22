@@ -23,8 +23,9 @@
 		display: flex;
 		flex-direction: column;
 		gap: 15px;
-		height: 250px;
-		overflow: auto;
+		//настроить скролл в блоке с инфой
+		// height: 350px;
+		// overflow: auto;
 		&_item {
 			display: flex;
 			justify-content: space-between;
