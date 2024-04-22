@@ -14,15 +14,18 @@ const createAccessoriesContent = () => {
 				<div className={style.content}>
 					<div className={style.content__header}>
 						<div className={style.content__header_title}>
-							<span>Название</span>
-							<span>Цена</span>
+							<div>Название</div>
+							<div>Цена</div>
 						</div>
 					</div>
 					<div className={style.content__info}>
 						{dataUser.length > 0 ? (
 							dataUser.map(item => (
 								<div className={style.content__info_item} key={item._id}>
-									<span>{item.title}</span> <span>{item.price} р</span>
+									<div>{item.title}</div>{' '}
+									<div className={style.content__info_item_price}>
+										{item.price} р
+									</div>
 								</div>
 							))
 						) : (
@@ -48,8 +51,8 @@ const createGasolineContent = () => {
 				<div className={style.content}>
 					<div className={style.content__header}>
 						<div className={style.content__header_title}>
-							<span>Дата</span>
-							<span>Цена</span>
+							<div>Дата</div>
+							<div>Цена</div>
 						</div>
 					</div>
 					<div className={style.content__info}>
@@ -67,7 +70,10 @@ const createGasolineContent = () => {
 								)
 								return (
 									<div className={style.content__info_item} key={item._id}>
-										<span>{formattedDate}</span> <span>{item.price} р</span>
+										<div>{formattedDate}</div>{' '}
+										<div className={style.content__info_item_price}>
+											{item.price} р
+										</div>
 									</div>
 								)
 							})
@@ -75,10 +81,10 @@ const createGasolineContent = () => {
 							<div className={style.content__info_null}> Пока пусто</div>
 						)}
 					</div>
+				</div>
 					<div className={style.content__icon}>
 						<img src={gas} alt='gas' />
 					</div>
-				</div>
 			</>
 		)
 	}
@@ -94,27 +100,30 @@ const createSparesContent = () => {
 				<div className={style.content}>
 					<div className={style.content__header}>
 						<div className={style.content__header_title}>
-							<span>Пробег</span>
-							<span>Название</span>
-							<span>Цена</span>
+							<div>Пробег</div>
+							<div>Название</div>
+							<div>Цена</div>
 						</div>
 					</div>
 					<div className={style.content__info}>
 						{dataUser.length > 0 ? (
 							dataUser.map(item => (
 								<div className={style.content__info_item} key={item._id}>
-									<span>{item.mileage}</span> <span>{item.title}</span>{' '}
-									<span>{item.price} р</span>
+									<div>{item.mileage}</div>
+									<div>{item.title}</div>
+									<div className={style.content__info_item_price}>
+										{item.price}
+									</div>
 								</div>
 							))
 						) : (
 							<div className={style.content__info_null}> Пока пусто</div>
 						)}
 					</div>
+				</div>
 					<div className={style.content__icon}>
 						<img src={spares} alt='spares' />
 					</div>
-				</div>
 			</>
 		)
 	}
