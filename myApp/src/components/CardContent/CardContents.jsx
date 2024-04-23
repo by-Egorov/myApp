@@ -35,9 +35,6 @@ const createAccessoriesContent = () => {
 							<img src={accessories} alt='accessories' />
 						</div>
 					</div>
-					{/* <div className={style.content__icon}>
-						<img src={accessories} alt='accessories' />
-					</div> */}
 				</div>
 			</>
 		)
@@ -88,9 +85,6 @@ const createGasolineContent = () => {
 						</div>
 					</div>
 				</div>
-				{/* <div className={style.content__icon}>
-					<img src={gas} alt='gas' />
-				</div> */}
 			</>
 		)
 	}
@@ -130,9 +124,6 @@ const createSparesContent = () => {
 						</div>
 					</div>
 				</div>
-				{/* <div className={style.content__icon}>
-						<img src={spares} alt='spares' />
-					</div> */}
 			</>
 		)
 	}

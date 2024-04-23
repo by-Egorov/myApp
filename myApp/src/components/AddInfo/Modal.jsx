@@ -1,7 +1,7 @@
 import style from './Modal.module.scss'
-import { IoIosArrowDown } from 'react-icons/io'
 import { useSpring, animated } from 'react-spring'
 import arrowDown from '../../assets/arrow-down.png'
+// eslint-disable-next-line react/prop-types
 const Modal = ({ cardContent, onClick }) => {
 	const animation = useSpring({
 		opacity: 1,

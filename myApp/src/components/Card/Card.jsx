@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import style from './Card.module.scss'
 
 const Card = ({
