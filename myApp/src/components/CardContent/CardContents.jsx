@@ -31,10 +31,13 @@ const createAccessoriesContent = () => {
 						) : (
 							<div className={style.content__info_null}> Пока пусто</div>
 						)}
+						<div className={style.content__icon}>
+							<img src={accessories} alt='accessories' />
+						</div>
 					</div>
-					<div className={style.content__icon}>
+					{/* <div className={style.content__icon}>
 						<img src={accessories} alt='accessories' />
-					</div>
+					</div> */}
 				</div>
 			</>
 		)
@@ -80,11 +83,14 @@ const createGasolineContent = () => {
 						) : (
 							<div className={style.content__info_null}> Пока пусто</div>
 						)}
+						<div className={style.content__icon}>
+							<img src={gas} alt='gas' />
+						</div>
 					</div>
 				</div>
-					<div className={style.content__icon}>
-						<img src={gas} alt='gas' />
-					</div>
+				{/* <div className={style.content__icon}>
+					<img src={gas} alt='gas' />
+				</div> */}
 			</>
 		)
 	}
@@ -119,11 +125,14 @@ const createSparesContent = () => {
 						) : (
 							<div className={style.content__info_null}> Пока пусто</div>
 						)}
+						<div className={style.content__icon}>
+							<img src={spares} alt='spares' />
+						</div>
 					</div>
 				</div>
-					<div className={style.content__icon}>
+				{/* <div className={style.content__icon}>
 						<img src={spares} alt='spares' />
-					</div>
+					</div> */}
 			</>
 		)
 	}

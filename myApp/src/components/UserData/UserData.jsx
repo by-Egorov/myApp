@@ -222,9 +222,6 @@ const UserData = () => {
 						buttonMore={moreIcon}
 					/>
 				</div>
-				{/* <button className='button' onClick={logOut}>
-					Выйти
-				</button> */}
 			</div>
 			{selectedCardType && (
 				<Modal
