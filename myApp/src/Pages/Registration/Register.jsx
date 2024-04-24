@@ -87,9 +87,10 @@ const Register = () => {
 			})
 
 			if (response) {
-				await $host.post('/send-email', {
+				const randomNumberMail = await $host.post('/send-email', {
 					email,
 				})
+				console.log(randomNumberMail)
 				//доработать отправку письма с подтверждением кода
 				setSendMail('На вашу почту отправлено письмо с кодом подтверждения')
 				setCheckMail(true)
@@ -106,7 +107,7 @@ const Register = () => {
 			setIsLoading(false)
 		}
 	}
-	const checked = data => {
+	const checked = async data => {
 		try {
 			console.log(data.check)
 		} catch (error) {
