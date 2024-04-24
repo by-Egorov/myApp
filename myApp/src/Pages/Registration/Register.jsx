@@ -30,6 +30,8 @@ const Register = () => {
 	const [sendMail, setSendMail] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const [checkMail, setCheckMail] = useState(false)
+	const [checkRandomNumberMail, setCheckRandomNumberMail] = useState('')
+	const [errCheckRandomNumberMail, setErrCheckRandomNumberMail] = useState('')
 
 	const registration = async data => {
 		const { email, password, carYear, carMileage, carModel, carBrand } = data
@@ -90,14 +92,14 @@ const Register = () => {
 				const randomNumberMail = await $host.post('/send-email', {
 					email,
 				})
-				console.log(randomNumberMail)
+				console.log(randomNumberMail.request.response)
+				setCheckRandomNumberMail(randomNumberMail.request.response)
+
 				//доработать отправку письма с подтверждением кода
 				setSendMail('На вашу почту отправлено письмо с кодом подтверждения')
 				setCheckMail(true)
 				localStorage.setItem('user', JSON.stringify(response.data))
 				localStorage.setItem('token', JSON.stringify(response.data.token))
-				// navigate('/')
-				// window.location.reload()
 			} else {
 				console.warn('Ошибка авторизации')
 			}
@@ -109,10 +111,21 @@ const Register = () => {
 	}
 	const checked = async data => {
 		try {
-			console.log(data.check)
+			if (checkRandomNumberMail === data.check) {
+				navigate('/')
+				window.location.reload()
+			} else {
+				setErrCheckRandomNumberMail('Не верный код, ')
+			}
 		} catch (error) {
 			console.warn(error)
 		}
+	}
+	const reSendCode = async (data) => {
+		const email = data
+		await $host.post('/send-email', {
+			email,
+		})
 	}
 	return (
 		<>
@@ -125,43 +138,9 @@ const Register = () => {
 							: handleSubmit(login)
 					}
 				>
-					<input
-						className={style.select}
-						{...register('email', {
-							required: true,
-							pattern:
-								/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-						})}
-						placeholder='почта'
-					/>
-					{errors?.email?.type === 'required' && (
-						<p className={style.err}>Это поле не может быть пустым</p>
-					)}
-					{errors?.email?.type === 'pattern' && (
-						<p className={style.err}>Введите корректный email</p>
-					)}
-					<input
-						className={style.select}
-						{...register('password', {
-							required: true,
-							minLength: 3,
-							maxLength: 8,
-						})}
-						type='password'
-						placeholder='пароль'
-					/>
-					{errors?.password?.type === 'required' && (
-						<p className={style.err}>Это поле не может быть пустым</p>
-					)}
-					{errors?.password?.type === 'minLength' && (
-						<p className={style.err}>Пароль короче 3 символов</p>
-					)}
-					{errors?.password?.type === 'maxLength' && (
-						<p className={style.err}>Пароль длиннее 8 символов</p>
-					)}
-					<div className={style.succes}>{sendMail}</div>
-					{checkMail && (
+					{checkMail ? (
 						<>
+							<div className={style.succes}>{sendMail}</div>
 							<input
 								className={style.select}
 								{...register('check', {
@@ -173,6 +152,56 @@ const Register = () => {
 							{errors?.check?.type === 'required' && (
 								<p className={style.err}>Это поле не может быть пустым</p>
 							)}
+							{errCheckRandomNumberMail && (
+								<>
+									<div className={style.err}>
+										{errCheckRandomNumberMail}{' '}
+										<span
+											className={style.link}
+											onClick={handleSubmit(reSendCode)}
+										>
+											выслать повторно ?
+										</span>
+									</div>
+								</>
+							)}
+						</>
+					) : (
+						<>
+							<input
+								className={style.select}
+								{...register('email', {
+									required: true,
+									pattern:
+										/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
+								})}
+								placeholder='почта'
+							/>
+							{errors?.email?.type === 'required' && (
+								<p className={style.err}>Это поле не может быть пустым</p>
+							)}
+							{errors?.email?.type === 'pattern' && (
+								<p className={style.err}>Введите корректный email</p>
+							)}
+							<input
+								className={style.select}
+								{...register('password', {
+									required: true,
+									minLength: 3,
+									maxLength: 8,
+								})}
+								type='password'
+								placeholder='пароль'
+							/>
+							{errors?.password?.type === 'required' && (
+								<p className={style.err}>Это поле не может быть пустым</p>
+							)}
+							{errors?.password?.type === 'minLength' && (
+								<p className={style.err}>Пароль короче 3 символов</p>
+							)}
+							{errors?.password?.type === 'maxLength' && (
+								<p className={style.err}>Пароль длиннее 8 символов</p>
+							)}{' '}
 						</>
 					)}
 					{location.pathname === '/register' && (
@@ -259,22 +288,21 @@ const Register = () => {
 					) : (
 						<>
 							<div className={style.start__button}>
-								{checkMail ? <button
-									className='button'
-									onClick={handleSubmit(checked)}
-								>
-									Продолжить
-								</button>
-								:
-								<button
-									className='button'
-									type='submit'
-									disabled={
-										location.pathname === '/register' && !selectedMileage
-									}
-								>
-									{location.pathname === '/register' ? 'Начать' : 'Войти'}
-								</button>}
+								{checkMail ? (
+									<button className='button' onClick={handleSubmit(checked)}>
+										Продолжить
+									</button>
+								) : (
+									<button
+										className='button'
+										type='submit'
+										disabled={
+											location.pathname === '/register' && !selectedMileage
+										}
+									>
+										{location.pathname === '/register' ? 'Начать' : 'Войти'}
+									</button>
+								)}
 							</div>
 							{location.pathname === '/register' ? (
 								<Link to='/login'>
