@@ -92,10 +92,7 @@ const Register = () => {
 				const randomNumberMail = await $host.post('/send-email', {
 					email,
 				})
-				console.log(randomNumberMail.request.response)
 				setCheckRandomNumberMail(randomNumberMail.request.response)
-
-				//доработать отправку письма с подтверждением кода
 				setSendMail('На вашу почту отправлено письмо с кодом подтверждения')
 				setCheckMail(true)
 				localStorage.setItem('user', JSON.stringify(response.data))
@@ -290,7 +287,7 @@ const Register = () => {
 							<div className={style.start__button}>
 								{checkMail ? (
 									<button className='button' onClick={handleSubmit(checked)}>
-										Продолжить
+										Подтвердить
 									</button>
 								) : (
 									<button
@@ -310,7 +307,7 @@ const Register = () => {
 								</Link>
 							) : (
 								<Link to='/register'>
-									<button className='button'>Добавить машину</button>
+									<button className='button' hidden={checkMail}>Добавить машину</button>
 								</Link>
 							)}
 						</>

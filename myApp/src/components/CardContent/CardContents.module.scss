@@ -2,7 +2,7 @@
 	width: 100vw;
 	padding: 20px;
 	position: relative;
-
+	font-size: 16px;
 	&__header {
 		width: 100%;
 
@@ -37,12 +37,13 @@
 			justify-content: space-between;
 			padding: 0 10px;
 			&_price {
-				font-weight: 600;
+				font-weight: 500;
 				color: green;
+				text-wrap: nowrap;
 			}
 			& div {
 				padding: 0 10px;
-				text-align: center;
+				
 			}
 		}
 		&_null {
