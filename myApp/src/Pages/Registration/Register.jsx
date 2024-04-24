@@ -27,8 +27,9 @@ const Register = () => {
 	const [selectedModel, setSelectedModel] = useState('')
 	const [selectedYear, setSelectedYear] = useState('')
 	const [selectedMileage, setSelectedMileage] = useState('')
-	// const [sendMail, setSendMail] = useState('')
+	const [sendMail, setSendMail] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
+	const [checkMail, setCheckMail] = useState(false)
 
 	const registration = async data => {
 		const { email, password, carYear, carMileage, carModel, carBrand } = data
@@ -90,11 +91,12 @@ const Register = () => {
 					email,
 				})
 				//доработать отправку письма с подтверждением кода
-				// setSendMail('На вашу почту отправлено письмо с кодом подтверждения')
+				setSendMail('На вашу почту отправлено письмо с кодом подтверждения')
+				setCheckMail(true)
 				localStorage.setItem('user', JSON.stringify(response.data))
 				localStorage.setItem('token', JSON.stringify(response.data.token))
-				navigate('/')
-				window.location.reload()
+				// navigate('/')
+				// window.location.reload()
 			} else {
 				console.warn('Ошибка авторизации')
 			}
@@ -102,6 +104,13 @@ const Register = () => {
 			console.warn(e)
 		} finally {
 			setIsLoading(false)
+		}
+	}
+	const checked = data => {
+		try {
+			console.log(data.check)
+		} catch (error) {
+			console.warn(error)
 		}
 	}
 	return (
@@ -149,7 +158,22 @@ const Register = () => {
 					{errors?.password?.type === 'maxLength' && (
 						<p className={style.err}>Пароль длиннее 8 символов</p>
 					)}
-
+					<div className={style.succes}>{sendMail}</div>
+					{checkMail && (
+						<>
+							<input
+								className={style.select}
+								{...register('check', {
+									required: true,
+								})}
+								type='number'
+								placeholder='Введите код'
+							/>
+							{errors?.check?.type === 'required' && (
+								<p className={style.err}>Это поле не может быть пустым</p>
+							)}
+						</>
+					)}
 					{location.pathname === '/register' && (
 						<>
 							<select
@@ -234,6 +258,13 @@ const Register = () => {
 					) : (
 						<>
 							<div className={style.start__button}>
+								{checkMail ? <button
+									className='button'
+									onClick={handleSubmit(checked)}
+								>
+									Продолжить
+								</button>
+								:
 								<button
 									className='button'
 									type='submit'
@@ -242,7 +273,7 @@ const Register = () => {
 									}
 								>
 									{location.pathname === '/register' ? 'Начать' : 'Войти'}
-								</button>
+								</button>}
 							</div>
 							{location.pathname === '/register' ? (
 								<Link to='/login'>

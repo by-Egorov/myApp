@@ -1,5 +1,4 @@
 import ReactLoading from 'react-loading'
-import style from './Example.module.scss'
 
 const Example = () => (
 	<ReactLoading
@@ -7,7 +6,6 @@ const Example = () => (
 		color='black'
 		width={40}
 		height={40}
-		className={style.loading}
 	/>
 )
 
