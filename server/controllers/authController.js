@@ -9,15 +9,14 @@ const getRandomNumber = (min, max) => {
 	return Math.round(Math.random() * (max - min) + min)
 }
 
-
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
+	host: 'smtp.gmail.com',
 	port: 465,
 	secure: true,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass:  process.env.EMAIL_PASS
-  }
+	auth: {
+		user: process.env.EMAIL_USER,
+		pass: process.env.EMAIL_PASS,
+	},
 })
 
 //Generate jwt token
@@ -171,10 +170,9 @@ export const sendMail = async (req, res) => {
 			<p>Ваш код подтверждения: ${randomNumber}</p>`,
 		})
 
-		res.status(200).json({ message: 'Email sent successfully' })
+		return res.json(randomNumber)
 	} catch (error) {
 		console.error(error)
 		res.status(500).send(error.message)
 	}
 }
-
