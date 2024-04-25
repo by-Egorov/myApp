@@ -1,6 +1,6 @@
 import style from './Register.module.scss'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import carData from '../../utils/carData.json'
@@ -23,6 +23,9 @@ const Register = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
+
+	const user = useSelector(state => state.user.user)
+
 	const [selectedBrand, setSelectedBrand] = useState('')
 	const [selectedModel, setSelectedModel] = useState('')
 	const [selectedYear, setSelectedYear] = useState('')
@@ -32,6 +35,7 @@ const Register = () => {
 	const [checkMail, setCheckMail] = useState(false)
 	const [checkRandomNumberMail, setCheckRandomNumberMail] = useState('')
 	const [errCheckRandomNumberMail, setErrCheckRandomNumberMail] = useState('')
+	const [reSendCode, setReSendCode] = useState('')
 
 	const registration = async data => {
 		const { email, password, carYear, carMileage, carModel, carBrand } = data
@@ -106,9 +110,20 @@ const Register = () => {
 			setIsLoading(false)
 		}
 	}
-	const checked = async data => {
+
+	const sendCode = async () => {
+		const { email } = user
+		console.log(email)
+		const code = await $host.post('/send-email', {
+			email,
+		})
+		setReSendCode(code)
+		console.log(code)
+	}
+
+	const checked = async (data) => {
 		try {
-			if (checkRandomNumberMail === data.check) {
+			if ( data.check === checkRandomNumberMail || reSendCode) {
 				navigate('/')
 				window.location.reload()
 			} else {
@@ -118,12 +133,7 @@ const Register = () => {
 			console.warn(error)
 		}
 	}
-	const reSendCode = async (data) => {
-		const email = data
-		await $host.post('/send-email', {
-			email,
-		})
-	}
+
 	return (
 		<>
 			<div className={style.start}>
@@ -153,10 +163,7 @@ const Register = () => {
 								<>
 									<div className={style.err}>
 										{errCheckRandomNumberMail}{' '}
-										<span
-											className={style.link}
-											onClick={handleSubmit(reSendCode)}
-										>
+										<span className={style.link} onClick={sendCode}>
 											выслать повторно ?
 										</span>
 									</div>
@@ -307,7 +314,9 @@ const Register = () => {
 								</Link>
 							) : (
 								<Link to='/register'>
-									<button className='button' hidden={checkMail}>Добавить машину</button>
+									<button className='button' hidden={checkMail}>
+										Добавить машину
+									</button>
 								</Link>
 							)}
 						</>
