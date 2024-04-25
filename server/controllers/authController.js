@@ -167,6 +167,9 @@ export const sendMail = async (req, res) => {
 			subject: `Служба поддержки приложения myCar`,
 			html: `
 			<p><strong>${randomNumber}</strong> - ваш код для авторизации на <a href='https://my-car-rho.vercel.app/' target=_blanc >myCar</a> </p>
+			<p>Приложение для ведения учета по своему авто</p>
+			<p>Текст для проверки</p>
+			<p>Попадет ли письмо под спам</p>
 			
 			`,
 		})
