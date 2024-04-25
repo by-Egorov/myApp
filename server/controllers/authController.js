@@ -164,10 +164,11 @@ export const sendMail = async (req, res) => {
 		await transporter.sendMail({
 			from: process.env.EMAIL, // Адрес отправителя
 			to: req.body.email, // Адрес получателя
-			subject: `Приветствую`,
+			subject: `Служба поддержки приложения myCar`,
 			html: `
-			<p>Вы пытаетесь авторизоваться в приложении myCar!</p>
-			<p>Ваш код подтверждения: ${randomNumber}</p>`,
+			<p><strong>${randomNumber}</strong> - ваш код для авторизации на <a href='https://my-car-rho.vercel.app/' target=_blanc >myCar</a> </p>
+			
+			`,
 		})
 
 		return res.json(randomNumber)
