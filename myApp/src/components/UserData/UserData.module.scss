@@ -2,6 +2,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	&__nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		width: 100%;
+	}
 	&__button {
 		display: flex;
 		align-items: center;
@@ -12,15 +18,19 @@
 		border: none;
 		padding: 5px 10px;
 		color: #000;
-		align-self: end;
 
 		& img {
 			width: 24px;
 			height: 24px;
 		}
 	}
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 10px;
+	}
 	&__title {
-		text-align: center;
 		& ul {
 			display: flex;
 			flex-direction: column;
@@ -32,17 +42,20 @@
 		}
 	}
 	&__image {
-		width: 300px;
+		width: 200px;
 
 		&_edit {
 			width: 20px;
 			height: 20px;
+
+			& img {
+				width: 20px;
+				height: 20px;
+			}
 		}
 		&_preload {
 			display: flex;
 			flex-direction: column-reverse;
-			align-items: center;
-			position: relative;
 			&_reload {
 				display: flex;
 				align-items: center;
@@ -82,7 +95,8 @@
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
-		gap: 5px;
+		row-gap: 25px;
+		column-gap: 5px;
 	}
 }
 .form_icons {
