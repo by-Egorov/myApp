@@ -1,6 +1,6 @@
 import style from './Modal.module.scss'
 import { useSpring, animated } from 'react-spring'
-import arrowDown from '../../assets/arrow-down.png'
+import arrowDown from '../../assets/back.png'
 // eslint-disable-next-line react/prop-types
 const Modal = ({ cardContent, onClick }) => {
 	const animation = useSpring({

@@ -20,12 +20,12 @@ import spares from '../../assets/spares.png'
 import gas from '../../assets/gas.png'
 import accessories from '../../assets/accessories.png'
 import mileage from '../../assets/mileage.png'
-import addIcon from '../../assets/add-icon.png'
-import moreIcon from '../../assets/more-icon.png'
-import editImage from '../../assets/image.png'
+import addIcon from '../../assets/add.png'
+import moreIcon from '../../assets/more.png'
+import editImage from '../../assets/img.png'
 import reload from '../../assets/reload.png'
 import send from '../../assets/send.png'
-import logout from '../../assets/logout.png'
+import logout from '../../assets/exit.png'
 
 const UserData = () => {
     const {register, handleSubmit, reset} = useForm()
