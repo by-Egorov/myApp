@@ -43,7 +43,6 @@
 			}
 			& div {
 				padding: 0 10px;
-				
 			}
 		}
 		&_null {
@@ -63,6 +62,13 @@
 		& img {
 			width: 300px;
 			height: 300px;
+		}
+		&_edit {
+			padding: 10px;
+			& img {
+				width: 42px;
+				height: 42px;
+			}
 		}
 	}
 }

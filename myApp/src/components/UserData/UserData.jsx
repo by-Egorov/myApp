@@ -26,6 +26,7 @@ import editImage from '../../assets/img.png'
 import reload from '../../assets/reload.png'
 import send from '../../assets/send.png'
 import logout from '../../assets/exit.png'
+import logo from '../../assets/logo.png'
 
 const UserData = () => {
     const {register, handleSubmit, reset} = useForm()
@@ -248,6 +249,7 @@ const UserData = () => {
                     cardContent={CardContents[selectedCardOpenType]}
                 />
             )}
+           <img className='logo' src={logo} alt="logo" />
         </>
     )
 }
